@@ -1,0 +1,35 @@
+#!/bin/sh
+#
+# Usage: yank [FILE...]
+
+# Hacked in 2017 by Gary Bishop to only use OSC52
+#
+# Copies the contents of the given files (or stdin if no files are given) to
+# the terminal that runs this program.
+#
+# This is achieved by writing an OSC 52 escape sequence to the said terminal.
+# The maximum length of an OSC 52 escape sequence is 100_000 bytes, of which
+# 7 bytes are occupied by a "\033]52;c;" header, 1 byte by a "\a" footer, and
+# 99_992 bytes by the base64-encoded result of 74_994 bytes of copyable text.
+#
+# In other words, this program can only copy up to 74_994 bytes of its input.
+#
+# See http://en.wikipedia.org/wiki/Base64 for the 4*ceil(n/3) length formula.
+# See http://sourceforge.net/p/tmux/mailman/message/32221257 for copy limits.
+# See http://sourceforge.net/p/tmux/tmux-code/ci/a0295b4c2f6 for DCS in tmux.
+#
+# Written in 2014 by Suraj N. Kurapati and documented at http://goo.gl/NwYqfW
+
+buf=$( cat "$@" )
+
+# copy to terminal
+len=$( printf %s "$buf" | wc -c ) max=74994
+test $len -gt $max && echo "$0: input is $(( len - max )) bytes too long" >&2
+
+esc="\033]52;c;$( printf %s "$buf" | head -c $max | base64 | tr -d '\r\n' )\a"
+printf "$esc"
+
+esc="\033Ptmux;\033$esc\033\\"
+
+printf "$esc"
+

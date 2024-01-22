@@ -1,0 +1,3 @@
+#!/bin/bash
+
+echo `date +'%D %T'` $* >> /tmp/log.log

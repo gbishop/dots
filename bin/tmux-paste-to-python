@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# find the pane with python running and paste the buffer to it
+# part of my vim python hack
+
+pane=`tmux list-panes -F '#{pane_title} #{pane_id}' | awk '/ipython/ {print $2}'`
+echo pane $pane
+tmux paste-buffer -p -t $pane
+tmux send-keys -t $pane Escape Enter

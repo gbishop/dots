@@ -1,0 +1,47 @@
+#!/bin/bash
+#
+# Copy files to and from my dots repo so I can synchronize them
+# 
+
+# files to synchronize with the relative path
+files=`cat <<END
+.bash_logout
+.bashrc
+.config/kitty
+.config/nvim
+.fonts
+.gitconfig
+.gitignore
+.inputrc
+.profile
+.ssh/config
+.terminfo
+.tmux.conf
+bin/autossh_work.sh
+bin/dots
+bin/log
+bin/mnencode
+bin/mnpassword
+bin/stableNeoVim
+bin/tmux-paste-to-python
+bin/update
+bin/yank
+END`
+
+repo=~/dots
+
+case $1 in
+
+  to)
+    cd ~
+    cp -a --parents $files $repo
+    ;;
+
+  from)
+    cd $repo
+    cp -a --parents $files ~
+    ;;
+
+  *)
+    echo usage: $0 [to|from]
+esac

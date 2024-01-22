@@ -1,0 +1,5 @@
+*.pyc
+*~
+*.sublime-workspace
+.ipynb_checkpoints
+*.swp
