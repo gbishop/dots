@@ -2,6 +2,12 @@
 #
 # Copy files to and from my dots repo so I can synchronize them
 # 
+# I tried lots of dotfile managers and none did the simple thing I wanted.
+# This is my attempt at a minimalist manager built on Git.
+# I keep my dotfiles and some associated scripts in a dots repo at GitHub.
+# I clone the repo locally into a folder named dots.
+# I use this script with the "to" argument to copy files from my home to the repo.
+# I use the script with the "from" argument to copy files from the repo to my home.
 
 # files to synchronize with the relative path
 files=`cat <<END
@@ -17,6 +23,7 @@ files=`cat <<END
 .ssh/config
 .terminfo
 .tmux.conf
+.virtual.sh
 bin/autossh_work.sh
 bin/dots
 bin/log
