@@ -29,11 +29,6 @@ vim.cmd(
 	"inoremap <silent> <C-l> <c-\\><c-n>:call searchpair('[([{]', '', '[)\\]}]', 'W')<cr>a"
 )
 
-vim.cmd([[
-" Make %% in command mode expand to the current file's path
-cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
-]])
-
 -- scrolling should not paste
 vim.keymap.set({ "n", "i" }, "<MiddleMouse>", "<Nop>")
 for i = 2, 4 do
@@ -43,4 +38,9 @@ end
 -- if I use the mouse to move leave input mode
 vim.cmd([[
 inoremap <LeftMouse> <Esc><LeftMouse>
+]])
+
+-- open file in same folder as current buffer
+vim.cmd([[
+map ,e :e <C-R>=expand("%:h") . "/" <CR>
 ]])
