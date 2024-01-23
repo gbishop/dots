@@ -3,3 +3,5 @@
 *.sublime-workspace
 .ipynb_checkpoints
 *.swp
+.config/nvim/lazy-lock.json
+
