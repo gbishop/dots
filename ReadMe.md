@@ -13,9 +13,8 @@ backup and syncronization.
 
 The flow goes like this:
 
-1. copy the files from $HOME to the repo.
-2. git fetch
-3. nvim -c G -c only
-4. git merge
-5. git push
-6. copy the files from repo to $HOME.
+1. git fetch
+2. copy the files from $HOME to the repo.
+3. nvim -c G -c only (to manage the merge)
+4. git push (should this be in the script?)
+5. copy the files from repo to $HOME.
