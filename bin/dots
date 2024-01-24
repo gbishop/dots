@@ -32,11 +32,11 @@ def sync(managed, src, dst):
         subprocess.run(["rsync", "-a", "--delete", spath, dpath], check=True)
 
 
-# copy the files from HOME into the REPO
-sync(LIST, HOME, REPO)
-
 # fetch files from the remote
 subprocess.run(["git", "fetch"], cwd=REPO, check=True)
+
+# copy the files from HOME into the REPO
+sync(LIST, HOME, REPO)
 
 # run nvim so I can manage the merge
 subprocess.run(["nvim", "-c", "G", "-c", "only"], cwd=REPO, check=True)
