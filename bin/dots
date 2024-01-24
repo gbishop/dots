@@ -1,58 +1,45 @@
-#!/bin/bash
-#
-# Copy files to and from my dots repo so I can synchronize them
-# 
-# I tried lots of dotfile managers and none did the simple thing I wanted.
-# This is my attempt at a minimalist manager built on Git.
-# I keep my dotfiles and some associated scripts in a dots repo at GitHub.
-# I clone the repo locally into a folder named dots.
-# I use this script with the "to" argument to copy files from my home to the repo.
-# I use the script with the "from" argument to copy files from the repo to my home.
+#!/usr/bin/env python3
 
-# files to synchronize with the relative path
-files=`cat <<END
-.bash_logout
-.bashrc
-.config/kitty
-.config/nvim
-.fonts
-.gitconfig
-.gitignore
-.inputrc
-.ipython
-.ipyt
-.jupyter
-.profile
-.ssh/config
-.terminfo
-.tmux.conf
-.virtual.sh
-bin/autossh_work.sh
-bin/dots
-bin/log
-bin/mnencode
-bin/mnpassword
-bin/stableNeoVim
-bin/tmux-paste-to-python
-bin/update
-bin/yank
-END`
+import os
+import os.path as osp
+import subprocess
 
-repo=~/dots
+HOME = "/home/gb"
+REPO = osp.join(HOME, "dots")
+LIST = osp.join(REPO, "managed.txt")
 
-case $1 in
 
-  to)
-    cd ~
-    cp -a --parents $files $repo
-    ;;
+def sync(managed, src, dst):
+    # files to synchronize with the relative path
+    files = []
+    with open(managed, "rt") as fp:
+        for line in fp:
+            name = line.strip()
+            if not name or name.startswith("#"):
+                continue
+            files.append(name)
 
-  from)
-    cd $repo
-    cp -a --parents $files ~
-    ;;
+    for file in files:
+        spath = osp.join(src, file)
+        dpath = osp.join(dst, file)
+        if not osp.exists(spath):
+            if osp.isfile(dpath):
+                print(f"remove {dpath}")
+                # os.remove(dpath)
+            elif osp.isdir(dpath):
+                print("not removing folder", dpath)
+        print(f"rsync -a --delete {spath} {dpath}")
+        # subprocess.run(["rsync", "-a", "--delete", spath, dpath])
 
-  *)
-    echo "usage: $0 [to|from]"
-    ;;
-esac
+
+# copy the files from HOME into the REPO
+sync(LIST, HOME, REPO)
+
+# fetch files from the remote
+subprocess.run(["git", "fetch"], cwd=REPO)
+
+# run nvim so I can manage the merge
+subprocess.run(["nvim", "-c", "G", "-c", "only"], cwd=REPO)
+
+# copy the files back out
+sync(LIST, REPO, HOME)
