@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
 
-import os
 import os.path as osp
 import subprocess
 
-HOME = "/home/gb"
+HOME = "/home/gb/"
 REPO = osp.join(HOME, "dots")
 LIST = osp.join(REPO, "managed.txt")
 
 
 def sync(managed, src, dst):
-    # files to synchronize with the relative path
+    """Synchronize files into and out of the repo"""
     files = []
     with open(managed, "rt") as fp:
         for line in fp:
@@ -23,23 +22,27 @@ def sync(managed, src, dst):
         spath = osp.join(src, file)
         dpath = osp.join(dst, file)
         if not osp.exists(spath):
-            if osp.isfile(dpath):
-                print(f"remove {dpath}")
-                # os.remove(dpath)
-            elif osp.isdir(dpath):
-                print("not removing folder", dpath)
-        print(f"rsync -a --delete {spath} {dpath}")
-        # subprocess.run(["rsync", "-a", "--delete", spath, dpath])
+            if osp.exists(dpath):
+                print("not removing", dpath)
+            continue
+        if osp.isdir(spath) and not spath.endswith("/"):
+            spath = spath + "/"
+            dpath = dpath + "/"
+        # print(f"rsync -a --delete {spath} {dpath}")
+        subprocess.run(["rsync", "-a", "--delete", spath, dpath], check=True)
 
 
 # copy the files from HOME into the REPO
 sync(LIST, HOME, REPO)
 
 # fetch files from the remote
-subprocess.run(["git", "fetch"], cwd=REPO)
+subprocess.run(["git", "fetch"], cwd=REPO, check=True)
 
 # run nvim so I can manage the merge
-subprocess.run(["nvim", "-c", "G", "-c", "only"], cwd=REPO)
+subprocess.run(["nvim", "-c", "G", "-c", "only"], cwd=REPO, check=True)
 
 # copy the files back out
-sync(LIST, REPO, HOME)
+if not osp.exists(osp.join(REPO, "stop")):
+    sync(LIST, REPO, HOME)
+else:
+    print("did not deploy")
