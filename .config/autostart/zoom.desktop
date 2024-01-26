@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=/usr/bin/zoom
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=Zoom
+Name=Zoom
+Comment[en_US]=Launch zoom on login
+Comment=Launch zoom on login

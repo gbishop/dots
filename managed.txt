@@ -2,6 +2,7 @@
 .bashrc
 .config/kitty
 .config/nvim
+.config/autostart
 .fonts
 .gitconfig
 .gitignore
