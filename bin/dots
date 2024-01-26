@@ -41,6 +41,9 @@ sync(LIST, HOME, REPO)
 # run nvim so I can manage the merge
 subprocess.run(["nvim", "-c", "G", "-c", "only"], cwd=REPO, check=True)
 
+# fetch files from the remote
+subprocess.run(["git", "push"], cwd=REPO, check=True)
+
 # copy the files back out
 if not osp.exists(osp.join(REPO, "stop")):
     sync(LIST, REPO, HOME)
