@@ -16,6 +16,7 @@
 .tmux.conf
 .virtual.sh
 bin/autossh_work.sh
+bin/clean_up.sh
 bin/dots
 bin/log
 bin/mnencode

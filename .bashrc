@@ -140,11 +140,8 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
-if [ -f ~/.docker-completion.sh ]; then
-    . ~/.docker-completion.sh
-fi
-if [ -f ~/share/bash/git-completion.bash ]; then
-    . ~/share/bash/git-completion.bash
+if [ -f /usr/share/bash-completion/completions/git ]; then
+    . /usr/share/bash-completion/completions/git
 fi
 
 
