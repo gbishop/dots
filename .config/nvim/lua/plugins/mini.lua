@@ -18,11 +18,11 @@ return {
 				source_func = "omnifunc",
 				auto_setup = false,
 			},
-			set_vim_settings = false,
+			set_vim_settings = true,
 		})
 
 		-- Set completeopt to have a better completion experience
-		vim.o.completeopt = "menu,menuone,preview"
+		-- vim.o.completeopt = "menu,menuone,preview,noselect"
 
 		-- get pairs to handoff CR
 		local pairs = require("nvim-autopairs")
@@ -38,15 +38,6 @@ return {
 					== nil
 		end
 
-		-- -- create a keymap using a callback
-		-- local function keyExpr(mode, key, remap, desc, callback)
-		-- 	vim.keymap.set(mode, key, callback, {
-		-- 		expr = true,
-		-- 		remap = remap,
-		-- 		desc = desc,
-		-- 	})
-		-- end
-		--
 		-- trigger completion with tab
 		vim.keymap.set("i", "<Tab>", function()
 			if vim.fn.pumvisible() ~= 0 then
@@ -61,17 +52,6 @@ return {
 			remap = true,
 			desc = "Tab/Complete/Next",
 		})
-		-- keyExpr("i", "<Tab>", true, "Tab/Complete/Next",
-		--     function()
-		-- 	if vim.fn.pumvisible() ~= 0 then
-		-- 		return "<C-n>"
-		-- 	elseif has_words_before() then
-		-- 		return "<C-Space>"
-		-- 	else
-		-- 		return "<Tab>"
-		-- 	end
-		-- end
-		--   )
 
 		-- goto previous with S-Tab
 		vim.keymap.set("i", "<S-Tab>", function()
@@ -85,41 +65,5 @@ return {
 			remap = false,
 			desc = "S-Tab/Previous",
 		})
-		-- keyExpr("i", "<S-Tab>", false, "S-Tab/Previous",
-		--     function()
-		-- 	if vim.fn.pumvisible() ~= 0 then
-		-- 		return "<C-p>"
-		-- 	else
-		-- 		return "<S-Tab>"
-		-- 	end
-		-- end
-		--   )
-
-		-- accept with CR or handoff to autopairs
-		vim.keymap.set("i", "<CR>", function()
-			if vim.fn.pumvisible() ~= 0 then
-				-- If popup is visible, confirm selected item or add new line otherwise
-				local item_selected = vim.fn.complete_info()["selected"] ~= -1
-				return item_selected and "<C-y>" or "<C-y><CR>"
-			else
-				return pairs.autopairs_cr()
-			end
-		end, {
-			expr = true,
-			remap = false,
-			desc = "CR/Select",
-			replace_keycodes = false,
-		})
-		-- keyExpr("i", "<CR>", false, "CR/Select",
-		--       function()
-		-- 	if vim.fn.pumvisible() ~= 0 then
-		-- 		-- If popup is visible, confirm selected item or add new line otherwise
-		-- 		local item_selected = vim.fn.complete_info()["selected"] ~= -1
-		-- 		return item_selected and "<C-y>" or "<C-y><CR>"
-		-- 	else
-		-- 		return pairs.autopairs_cr()
-		-- 	end
-		-- end
-		--     )
 	end,
 }
