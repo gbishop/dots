@@ -1,12 +1,12 @@
 return {
 	"echasnovski/mini.nvim",
-	dependencies = { "windwp/nvim-autopairs" },
 	config = function()
 		-- require("mini.jump2d").setup({})
 		require("mini.align").setup({})
 		require("mini.indentscope").setup({})
 		require("mini.bracketed").setup({})
 		require("mini.colors").setup({})
+		require("mini.jump2d").setup()
 
 		require("mini.completion").setup({
 			delay = {
@@ -20,12 +20,6 @@ return {
 			},
 			set_vim_settings = true,
 		})
-
-		-- Set completeopt to have a better completion experience
-		-- vim.o.completeopt = "menu,menuone,preview,noselect"
-
-		-- get pairs to handoff CR
-		local pairs = require("nvim-autopairs")
 
 		local function has_words_before()
 			unpack = unpack or table.unpack
