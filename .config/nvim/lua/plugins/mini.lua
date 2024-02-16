@@ -1,11 +1,12 @@
 return {
 	"echasnovski/mini.nvim",
 	config = function()
-		-- require("mini.jump2d").setup({})
+		require("mini.ai").setup()
 		require("mini.align").setup({})
-		require("mini.indentscope").setup({})
 		require("mini.bracketed").setup({})
 		require("mini.colors").setup({})
+		require("mini.indentscope").setup({})
+		require("mini.jump").setup()
 		require("mini.jump2d").setup()
 
 		require("mini.completion").setup({
