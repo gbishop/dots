@@ -57,7 +57,7 @@ return {
 			)
 			vim.keymap.set(
 				"n",
-				"<leader>cr",
+				"<leader>lr",
 				vim.lsp.buf.rename,
 				{ buffer = bufnr, desc = "LSP rename" }
 			)
@@ -69,7 +69,7 @@ return {
 			)
 			vim.keymap.set(
 				"n",
-				"<leader>ca",
+				"<leader>la",
 				vim.lsp.buf.code_action,
 				{ buffer = bufnr, desc = "LSP code action" }
 			)
@@ -84,7 +84,7 @@ return {
 			end, {})
 			vim.keymap.set(
 				"n",
-				"<leader>l",
+				"<leader>ll",
 				require("lsp_lines").toggle,
 				{ buffer = bufnr, desc = "Toggle lsp lines" }
 			)
