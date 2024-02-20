@@ -64,8 +64,8 @@ return {
 		local miniclue = require("mini.clue")
 
 		-- Add clues for text objects so I can learn them
+		-- from: https://github.com/echasnovski/mini.nvim/issues/430#issuecomment-1703220671
 		miniclue.gen_clues.text_objects = function()
-			---@type table<string, string>
 			local i = {
 				[" "] = "Whitespace",
 				['"'] = 'Balanced "',
@@ -89,19 +89,10 @@ return {
 				q = "Quote `, \", '",
 				t = "Tag",
 			}
-			---@type table<string, string>
 			local a = vim.deepcopy(i)
 			for k, v in pairs(a) do
 				a[k] = v:gsub(" including.*", "")
 			end
-
-			-- Example of desired clues output:
-			-- { mode = "o", keys = "if", desc = "Inside Function" },
-			-- { mode = "o", keys = "af", desc = "Around Function" },
-			-- { mode = "o", keys = "inf", desc = "Inside next Function" },
-			-- { mode = "o", keys = "ilf", desc = "Inside last Function" },
-			-- { mode = "o", keys = "anf", desc = "Around next Function" },
-			-- { mode = "o", keys = "alf", desc = "Around last Function" },
 
 			local clues = {}
 			for key, name in pairs(i) do
