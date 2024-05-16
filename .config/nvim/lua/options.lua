@@ -13,8 +13,9 @@ vim.wo.number = true
 --Enable mouse mode
 vim.o.mouse = "a"
 
---Enable break indent
+--Breaking
 vim.o.breakindent = true
+vim.o.linebreak = true
 
 --Save undo history
 vim.opt.undofile = true
