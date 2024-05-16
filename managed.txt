@@ -3,6 +3,7 @@
 .config/kitty
 .config/nvim
 .config/autostart
+.config/solaar
 .fonts
 .gitconfig
 .gitignore

@@ -1,0 +1,29 @@
+- 1.1.8+dfsg-2
+- _NAME: Wave Keys
+  _absent: [hi-res-scroll, lowres-scroll-mode, hires-smooth-invert, hires-smooth-resolution, hires-scroll-mode, scroll-ratchet, smart-shift, thumb-scroll-invert,
+    thumb-scroll-mode, onboard_profiles, report_rate, pointer_speed, dpi, speed-change, backlight, backlight-timed, reprogrammable-keys, persistent-remappable-keys,
+    crown-smooth, divert-crown, divert-gkeys, m-key-leds, mr-key-led, gesture2-gestures, gesture2-divert, gesture2-params, sidetone, equalizer]
+  _battery: 4100
+  _modelId: B38300000000
+  _serial: 06AD9251
+  _unitId: 06AD9251
+  _wpid: B383
+  change-host: null
+  disable-keyboard-keys: {1: false, 2: false, 4: false, 8: false, 16: false}
+  divert-keys: {224: 0, 231: 0, 232: 0, 233: 0, 259: 0, 264: 0, 266: 0, 279: 0, 280: 0, 281: 0, 282: 0, 283: 0, 284: 0, 321: 0}
+  fn-swap: false
+  multiplatform: 0
+- _NAME: Wireless Mouse M510
+  _absent: [hi-res-scroll, hires-smooth-invert, hires-smooth-resolution, hires-scroll-mode, scroll-ratchet, smart-shift, thumb-scroll-invert, thumb-scroll-mode,
+    onboard_profiles, report_rate, dpi, speed-change, backlight, backlight-timed, fn-swap, persistent-remappable-keys, disable-keyboard-keys, crown-smooth,
+    divert-crown, divert-gkeys, m-key-leds, mr-key-led, multiplatform, change-host, gesture2-gestures, gesture2-divert, gesture2-params, sidetone, equalizer]
+  _battery: 4096
+  _modelId: '405100000000'
+  _sensitive: {divert-keys: true, reprogrammable-keys: true}
+  _serial: 0167D5F9
+  _unitId: 0167D5F9
+  _wpid: '4051'
+  divert-keys: {80: 0, 81: 0, 82: 1, 83: 0, 86: 0, 91: 0, 93: 0}
+  lowres-scroll-mode: false
+  pointer_speed: 256
+  reprogrammable-keys: {80: 80, 81: 81, 82: 81, 83: 83, 86: 86, 91: 91, 93: 93}
