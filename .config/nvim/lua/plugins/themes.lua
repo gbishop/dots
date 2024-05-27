@@ -3,10 +3,11 @@ Themes I've tried:
 
 --]]
 return {
-	"rebelot/kanagawa.nvim",
-	"EdenEast/nightfox.nvim",
-	"Iron-E/nvim-highlite",
-	"folke/tokyonight.nvim",
+	-- "rebelot/kanagawa.nvim",
+	-- "EdenEast/nightfox.nvim",
+	-- "Iron-E/nvim-highlite",
+	-- "folke/tokyonight.nvim",
+	-- "slugbyte/lackluster.nvim",
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
