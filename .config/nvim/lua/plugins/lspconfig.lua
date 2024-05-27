@@ -4,6 +4,7 @@ return {
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
 		"nvim-telescope/telescope.nvim",
+		"Fildo7525/pretty_hover",
 	},
 	config = function()
 		require("mason").setup()
@@ -20,6 +21,7 @@ return {
 		})
 		local lspconfig = require("lspconfig")
 		local tb = require("telescope.builtin")
+		local pretty_hover = require("pretty_hover")
 
 		local on_attach = function(_, bufnr)
 			-- for MiniCompletion
@@ -40,7 +42,7 @@ return {
 			vim.keymap.set(
 				"n",
 				"K",
-				vim.lsp.buf.hover,
+				pretty_hover.hover,
 				{ buffer = bufnr, desc = "LSP hover" }
 			)
 			vim.keymap.set(
