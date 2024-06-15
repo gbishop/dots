@@ -61,6 +61,8 @@ session="$(sed s/penguin/CB/ <<< $HOST)"
 case $TERM in
     rxvt-unicode-256color | xterm-kitty)
       /home/gb/bin/log TMUX is $TMUX
+      killall xcape
+      /home/gb/bin/log running xcape
       xcape -e Control_L=Escape
 	[ -z "$TMUX" -a ! -f "notmux" ] && exec tmux -2 new-session -A -s $session
 	;;
