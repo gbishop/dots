@@ -2,6 +2,11 @@
 
 import os.path as osp
 import subprocess
+import argparse
+
+parser = argparse.ArgumentParser(prog="dots", description="synchronize my dot files")
+parser.add_argument("-i", "--initial", action="store_true")
+args = parser.parse_args()
 
 HOME = "/home/gb/"
 REPO = osp.join(HOME, "dots")
@@ -32,17 +37,18 @@ def sync(managed, src, dst):
         subprocess.run(["rsync", "-a", "--delete", spath, dpath], check=True)
 
 
-# fetch files from the remote
-subprocess.run(["git", "fetch"], cwd=REPO, check=True)
+if not args.initial:
+    # fetch files from the remote
+    subprocess.run(["git", "fetch"], cwd=REPO, check=True)
 
-# copy the files from HOME into the REPO
-sync(LIST, HOME, REPO)
+    # copy the files from HOME into the REPO
+    sync(LIST, HOME, REPO)
 
-# run nvim so I can manage the merge
-subprocess.run(["nvim", "-c", "G", "-c", "only"], cwd=REPO, check=True)
+    # run nvim so I can manage the merge
+    subprocess.run(["nvim", "-c", "G", "-c", "only"], cwd=REPO, check=True)
 
-# fetch files from the remote
-subprocess.run(["git", "push"], cwd=REPO, check=True)
+    # fetch files from the remote
+    subprocess.run(["git", "push"], cwd=REPO, check=True)
 
 # copy the files back out
 if not osp.exists(osp.join(REPO, "stop")):
