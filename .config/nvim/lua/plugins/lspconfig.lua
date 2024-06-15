@@ -17,6 +17,7 @@ return {
 				"jsonls",
 				"marksman",
 				"pyright",
+				"intelephense",
 			},
 		})
 		local lspconfig = require("lspconfig")
@@ -97,13 +98,80 @@ return {
 		-- capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 		-- Enable the following language servers
-		local servers = { "tsserver", "html", "cssls", "jsonls", "marksman", "pyright" }
+		local servers = {
+			"tsserver",
+			"html",
+			"cssls",
+			"jsonls",
+			"marksman",
+			"pyright",
+		}
 		for _, lsp in ipairs(servers) do
 			lspconfig[lsp].setup({
 				on_attach = on_attach,
 				-- capabilities = capabilities,
 			})
 		end
+
+		lspconfig.intelephense.setup({
+			settings = {
+				intelephense = {
+					stubs = {
+						"bcmath",
+						"bz2",
+						"Core",
+						"curl",
+						"date",
+						"dom",
+						"fileinfo",
+						"filter",
+						"gd",
+						"gettext",
+						"hash",
+						"iconv",
+						"imap",
+						"intl",
+						"json",
+						"libxml",
+						"mbstring",
+						"mcrypt",
+						"mysql",
+						"mysqli",
+						"openssl",
+						"password",
+						"pcntl",
+						"pcre",
+						"PDO",
+						"pdo_mysql",
+						"Phar",
+						"readline",
+						"regex",
+						"session",
+						"SimpleXML",
+						"sockets",
+						"sodium",
+						"standard",
+						"superglobals",
+						"tokenizer",
+						"xml",
+						"xdebug",
+						"xmlreader",
+						"xmlwriter",
+						"yaml",
+						"zip",
+						"zlib",
+						"wordpress",
+						"wordpress-stubs",
+						"woocommerce-stubs",
+						"acf-pro-stubs",
+						"wordpress-globals",
+						"wp-cli-stubs",
+						"genesis-stubs",
+						"polylang-stubs",
+					},
+				},
+			},
+		})
 
 		-- Example custom server
 		-- Make runtime files discoverable to the server
