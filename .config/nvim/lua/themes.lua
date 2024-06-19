@@ -31,10 +31,10 @@ end
 
 -- adjust colors when the theme changes
 local function adjustColors()
-	local normal = vim.api.nvim_get_hl_by_name("Normal", true)
-	local activeBG = normal.background or 0
+	local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
+	local activeBG = normal.bg or 0
 	local inactiveBG = dull(activeBG, 0.15)
-	local activeFG = normal.foreground
+	local activeFG = normal.fg
 
 	vim.cmd(string.format("hi ActiveWindow guibg=#%x", activeBG))
 	vim.cmd(string.format("hi InactiveWindow guibg=#%x", inactiveBG))
