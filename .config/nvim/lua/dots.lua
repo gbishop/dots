@@ -1,12 +1,6 @@
-vim.keymap.set(
-	"n",
-	"<Leader>x",
-	"<Cmd>write | source %<CR>",
-	{ desc = "Save and execute" }
-)
-
 local Job = require("plenary.job")
 
+-- Copy the managed files to where they belong
 local sync = function()
 	Job:new({
 		command = "rsync",
@@ -15,7 +9,7 @@ local sync = function()
 			"-ra",
 			"--files-from=managed.txt",
 			".",
-			"/tmp/test",
+			"/home/gb/",
 		},
 		cwd = "/home/gb/dots",
 	}):sync()
@@ -24,12 +18,14 @@ end
 
 local group = vim.api.nvim_create_augroup("dots", { clear = true })
 
+-- sync whenever I write a file in the repo
 vim.api.nvim_create_autocmd("BufWritePost", {
 	group = group,
 	pattern = "/home/gb/dots/*",
 	callback = sync,
 })
 
+-- sync when git makes changes
 vim.api.nvim_create_autocmd("User", {
 	group = group,
 	pattern = "FugitiveChanged",
@@ -38,16 +34,12 @@ vim.api.nvim_create_autocmd("User", {
 
 local nt = require("neo-tree.events")
 
-local delete_handler = {
-	event = "file_deleted",
-	handler = sync,
-	id = 3141,
-}
-nt.subscribe(delete_handler)
+local nt_events = { "file_added", "file_deleted", "file_renamed", "file_moved" }
 
-local rename_handler = {
-	event = "file_renamed",
-	handler = sync,
-	id = 31415,
-}
-nt.subscribe(rename_handler)
+for i, event in ipairs(nt_events) do
+	nt.subscribe({
+		event = event,
+		handler = sync,
+		id = 3140 + i,
+	})
+end
