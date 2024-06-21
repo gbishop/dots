@@ -6,14 +6,13 @@ local sync = function()
 		command = "rsync",
 		args = {
 			"--delete",
-			"-ra",
+			"-rlt",
 			"--files-from=managed.txt",
 			".",
 			"/home/gb/",
 		},
 		cwd = "/home/gb/dots",
 	}):sync()
-	print("synced")
 end
 
 local dots = { sync = sync }
