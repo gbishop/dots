@@ -27,6 +27,8 @@ require("keymaps")
 
 require("themes")
 
+require("dots")
+
 vim.filetype.add({
 	pattern = {
 		["*.bake"] = "bake",

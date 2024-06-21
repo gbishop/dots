@@ -16,6 +16,8 @@ local sync = function()
 	print("synced")
 end
 
+local dots = { sync = sync }
+
 local group = vim.api.nvim_create_augroup("dots", { clear = true })
 
 -- sync whenever I write a file in the repo
@@ -31,15 +33,4 @@ vim.api.nvim_create_autocmd("User", {
 	pattern = "FugitiveChanged",
 	callback = sync,
 })
-
-local nt = require("neo-tree.events")
-
-local nt_events = { "file_added", "file_deleted", "file_renamed", "file_moved" }
-
-for i, event in ipairs(nt_events) do
-	nt.subscribe({
-		event = event,
-		handler = sync,
-		id = 3140 + i,
-	})
-end
+return dots

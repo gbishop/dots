@@ -17,7 +17,6 @@
 .tmux.conf
 .virtual.sh
 bin/autossh_work.sh
-bin/dots
 bin/log
 bin/mnencode
 bin/mnpassword
