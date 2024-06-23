@@ -3,13 +3,9 @@ local Job = require("plenary.job")
 -- Copy the managed files to where they belong
 local sync = function()
 	Job:new({
-		command = "rsync",
+		command = "bash",
 		args = {
-			"--delete",
-			"-rlt",
-			"--files-from=managed.txt",
-			".",
-			"/home/gb/",
+			"deploy.sh",
 		},
 		cwd = "/home/gb/dots",
 	}):sync()
@@ -30,6 +26,11 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 vim.api.nvim_create_autocmd("User", {
 	group = group,
 	pattern = "FugitiveChanged",
-	callback = sync,
+	callback = function()
+		local cwd = vim.uv.cwd()
+		if string.match(cwd, "/home/gb/dots/*") then
+			sync()
+		end
+	end,
 })
 return dots
