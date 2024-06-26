@@ -19,7 +19,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- install plugins using lazy
-require("lazy").setup("plugins", { defaults = { lazy = false } })
+require("lazy").setup(
+	"plugins",
+	{ defaults = { lazy = false }, lockfile = "/home/gb/dots/.config/nvim/lazy-lock.json" }
+)
 
 require("options")
 
