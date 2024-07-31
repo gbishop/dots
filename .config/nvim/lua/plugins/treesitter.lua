@@ -96,53 +96,5 @@ return {
 				},
 			},
 		})
-		--Add keymaps
-		local tb = require("telescope.builtin")
-
-		vim.keymap.set("n", "<leader><space>", function()
-			tb.buffers({ sort_mru = true, ignore_current_buffer = true })
-		end, { desc = "buffers" })
-		vim.keymap.set(
-			"n",
-			"<leader>sb",
-			tb.current_buffer_fuzzy_find,
-			{ desc = "fuzzy buffers" }
-		)
-		vim.keymap.set("n", "<leader>sc", tb.commands, { desc = "Commands" })
-		vim.keymap.set("n", "<leader>sd", tb.diagnostics, { desc = "Diagnostics" })
-		vim.keymap.set("n", "<leader>sf", tb.find_files, { desc = "files" })
-		vim.keymap.set("n", "<leader>sg", tb.live_grep, { desc = "live grep" })
-		vim.keymap.set("n", "<leader>sh", tb.help_tags, { desc = "help tags" })
-		vim.keymap.set("n", "<leader>sk", tb.keymaps, { desc = "Key Maps" })
-		vim.keymap.set("n", "<leader>sr", tb.lsp_references, { desc = "lsp references" })
-		vim.keymap.set("n", "<leader>ss", function()
-			vim.cmd([[ Telescope luasnip ]])
-		end, { desc = "snippets" })
-		vim.keymap.set("n", "<leader>st", tb.tags, { desc = "tags" })
-		vim.keymap.set("n", "<leader>sT", function()
-			tb.tags({ only_current_buffer = true })
-		end, { desc = "tags current" })
-		vim.keymap.set("n", "<leader>?", tb.oldfiles, { desc = "old files" })
-
-		-- Diagnostic keymaps
-		vim.keymap.set(
-			"n",
-			"<leader>e",
-			vim.diagnostic.open_float,
-			{ desc = "Diagnostic open float" }
-		)
-		-- vim.keymap.set(
-		-- 	"n",
-		-- 	"[d",
-		-- 	vim.diagnostic.goto_prev,
-		-- 	{ desc = "Previous diagnostic" }
-		-- )
-		-- vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
-		vim.keymap.set(
-			"n",
-			"<leader>q",
-			vim.diagnostic.setloclist,
-			{ desc = "Diagnostic loc list" }
-		)
 	end,
 }
