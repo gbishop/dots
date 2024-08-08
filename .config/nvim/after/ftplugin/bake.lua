@@ -9,7 +9,9 @@ vim.keymap.set("n", "<leader>r", function()
 
 	formatted_lines = vim.fn.systemlist("python /home/gb/bake/bake.py", original_lines)
 	if vim.v.shell_error ~= 0 then
-		error("\n\n" .. table.concat(formatted_lines, "\n") .. "\n")
+		local notify = require("notify")
+		notify(table.concat(formatted_lines, "\n"), "error")
+		return
 	end
 
 	local view = vim.fn.winsaveview()
@@ -24,7 +26,9 @@ vim.keymap.set("n", "<leader>R", function()
 
 	formatted_lines = vim.fn.systemlist("python /home/gb/bake/bake.py -R", original_lines)
 	if vim.v.shell_error ~= 0 then
-		error("\n\n" .. table.concat(formatted_lines, "\n") .. "\n")
+		local notify = require("notify")
+		notify(table.concat(formatted_lines, "\n"), "error")
+		return
 	end
 
 	local view = vim.fn.winsaveview()
