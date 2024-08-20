@@ -37,3 +37,6 @@ vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.expandtab = true
 vim.opt.smartindent = true
+
+-- always use the clipboard
+vim.opt.clipboard = "unnamedplus"
