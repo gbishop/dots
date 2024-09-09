@@ -11,7 +11,7 @@ return {
 		require("mason-lspconfig").setup({
 			ensure_installed = {
 				"lua_ls",
-				"tsserver",
+				"ts_ls",
 				"html",
 				"cssls",
 				"jsonls",
@@ -99,7 +99,7 @@ return {
 
 		-- Enable the following language servers
 		local servers = {
-			"tsserver",
+			"ts_ls",
 			"html",
 			"cssls",
 			"jsonls",
