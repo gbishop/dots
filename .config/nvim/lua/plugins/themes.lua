@@ -8,6 +8,7 @@ return {
 	-- "Iron-E/nvim-highlite",
 	-- "folke/tokyonight.nvim",
 	-- "slugbyte/lackluster.nvim",
+	"https://gitlab.com/bartekjaszczak/finale-nvim",
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",

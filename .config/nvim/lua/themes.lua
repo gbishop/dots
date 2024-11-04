@@ -2,9 +2,10 @@
 
 vim.o.background = "dark"
 
-vim.cmd("colorscheme mellifluous")
+-- vim.cmd("colorscheme mellifluous")
+vim.cmd("colorscheme finale")
 -- adjust the cursor line highlight
-vim.cmd("hi CursorLine guibg=#303030")
+-- vim.cmd("hi CursorLine guibg=#303030")
 vim.cmd("set cursorline")
 
 --
