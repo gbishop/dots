@@ -118,12 +118,12 @@ return {
 
 			for key1, name1 in pairs({ n = "Next", l = "Last" }) do
 				for key2, name2 in pairs(i) do
-					-- stylua: ignore
-					table.insert(clues, { mode = "o", keys = "i" .. key1 .. key2, desc = "Inside " .. name1 .. " " .. name2 })
+          -- stylua: ignore
+          table.insert(clues, { mode = "o", keys = "i" .. key1 .. key2, desc = "Inside " .. name1 .. " " .. name2 })
 				end
 				for key2, name2 in pairs(a) do
-					-- stylua: ignore
-					table.insert(clues, { mode = "o", keys = "a" .. key1 .. key2, desc = "Around " .. name1 .. " " .. name2 })
+          -- stylua: ignore
+          table.insert(clues, { mode = "o", keys = "a" .. key1 .. key2, desc = "Around " .. name1 .. " " .. name2 })
 				end
 			end
 
