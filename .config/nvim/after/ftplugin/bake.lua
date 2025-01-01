@@ -1,6 +1,6 @@
 -- nvim/after/ftplugin/bake.lua
 --
-vim.bo.textwidth = 80
+vim.bo.textwidth = 68
 
 -- Run my bake script
 vim.keymap.set("n", "<leader>r", function()
