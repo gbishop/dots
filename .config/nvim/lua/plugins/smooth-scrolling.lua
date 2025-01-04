@@ -1,8 +1,12 @@
 return {
 	"declancm/cinnamon.nvim",
-	config = function()
-		require("cinnamon").setup({
+	version = "*",
+	opts = {
+		keymaps = {
 			basic = true,
-		})
-	end,
+		},
+	},
+	options = {
+		mode = "cursor",
+	},
 }
