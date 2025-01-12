@@ -42,6 +42,7 @@ return {
 					"html",
 					"javascript",
 					"typescript",
+					"python",
 				},
 			},
 			textobjects = {
