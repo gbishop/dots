@@ -50,7 +50,7 @@
 # c.InteractiveShellApp.hide_initial_ns = True
 
 ## Configure matplotlib for interactive use with the default matplotlib backend.
-# c.InteractiveShellApp.matplotlib = None
+c.InteractiveShellApp.matplotlib = "tk"
 
 ## Run the module as a script.
 # c.InteractiveShellApp.module_to_run = ''
