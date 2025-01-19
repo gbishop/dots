@@ -3,6 +3,7 @@ return {
 	config = function()
 		require("mini.ai").setup()
 		require("mini.align").setup({})
+		require("mini.animate").setup()
 		require("mini.bracketed").setup({})
 		require("mini.colors").setup({})
 		require("mini.indentscope").setup({})
