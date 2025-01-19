@@ -31,9 +31,10 @@ return {
 				local bufname = vim.api.nvim_buf_get_name(props.buf)
 				local filename = vim.fn.fnamemodify(bufname, ":t")
 				local diagnostics = get_diagnostic_label(props)
-				local modified = vim.api.nvim_buf_get_option(props.buf, "modified")
-						and "bold,italic"
-					or "None"
+				local modified = vim.api.nvim_get_option_value(
+					"modified",
+					{ buf = props.buf }
+				) and "bold,italic" or "None"
 
 				local buffer = {
 					{ filename, gui = modified },

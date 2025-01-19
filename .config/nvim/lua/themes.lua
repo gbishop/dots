@@ -43,6 +43,7 @@ local function adjustColors()
 
 	-- adjust TMUX colors
 	local Job = require("plenary.job")
+	---@diagnostic disable-next-line: missing-fields
 	Job:new({
 		command = "tmux",
 		args = {

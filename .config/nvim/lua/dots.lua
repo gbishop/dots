@@ -2,6 +2,7 @@ local Job = require("plenary.job")
 
 -- Copy the managed files to where they belong
 local sync = function()
+	---@diagnostic disable-next-line: missing-fields
 	Job:new({
 		command = "bash",
 		args = {
@@ -27,6 +28,7 @@ vim.api.nvim_create_autocmd("User", {
 	group = group,
 	pattern = "FugitiveChanged",
 	callback = function()
+		---@diagnostic disable-next-line: undefined-field
 		local cwd = vim.uv.cwd()
 		if string.match(cwd, "/home/gb/dots/*") then
 			sync()
