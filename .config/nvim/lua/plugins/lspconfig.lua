@@ -85,12 +85,6 @@ return {
 			vim.api.nvim_buf_create_user_command(bufnr, "Format", function()
 				vim.lsp.buf.format({ async = true })
 			end, {})
-			vim.keymap.set(
-				"n",
-				"<leader>ll",
-				require("lsp_lines").toggle,
-				{ buffer = bufnr, desc = "Toggle lsp lines" }
-			)
 		end
 
 		-- nvim-cmp supports additional completion capabilities
