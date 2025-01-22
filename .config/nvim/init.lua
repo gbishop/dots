@@ -16,17 +16,15 @@ if not vim.loop.fs_stat(lazypath) then
 		lazypath,
 	})
 end
+---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 -- install plugins using lazy
-require("lazy").setup(
-	"plugins",
-	{
-		defaults = { lazy = false },
-		lockfile = "/home/gb/dots/.config/nvim/lazy-lock.json",
-		rocks = { hererocks = false, enabled = false },
-	}
-)
+require("lazy").setup("plugins", {
+	defaults = { lazy = false },
+	lockfile = "/home/gb/dots/.config/nvim/lazy-lock.json",
+	rocks = { hererocks = false, enabled = false },
+})
 
 require("options")
 
