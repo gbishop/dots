@@ -1,8 +1,10 @@
 #!/bin/sh
 
+name=nvim-linux-x86_64
+
 cd ~/Downloads
-wget https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
-tar -xf nvim-linux64.tar.gz
-cp -a nvim-linux64/* ~/.local/
-rm -r nvim-linux64
-rm nvim-linux64.tar.gz
+wget https://github.com/neovim/neovim/releases/download/stable/$name.tar.gz
+tar -xf $name.tar.gz
+cp -a $name/* ~/.local/
+rm -r $name
+rm $name.tar.gz
