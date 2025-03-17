@@ -1,37 +1,25 @@
---Remap space as leader key
-vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
--- bootstrap lazy
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-
-if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable", -- latest stable release
-		lazypath,
-	})
+local function setup_deps(path_to_site)
+	local mini_path = path_to_site .. "pack/deps/start/mini.nvim"
+	if not vim.uv.fs_stat(mini_path) then
+		vim.cmd('echo "Installing `mini.nvim`" | redraw')
+		local clone_cmd = {
+			"git",
+			"clone",
+			"--filter=blob:none",
+			"https://github.com/echasnovski/mini.nvim",
+			mini_path,
+		}
+		vim.fn.system(clone_cmd)
+		vim.cmd("packadd mini.nvim | helptags ALL")
+		vim.cmd('echo "Installed `mini.nvim`" | redraw')
+	end
+	require("mini.deps").setup({ path = { package = path_to_site } })
 end
----@diagnostic disable-next-line: undefined-field
-vim.opt.rtp:prepend(lazypath)
-
--- install plugins using lazy
-require("lazy").setup("plugins", {
-	defaults = { lazy = false },
-	lockfile = "/home/gb/dots/.config/nvim/lazy-lock.json",
-	rocks = { hererocks = false, enabled = false },
-})
+setup_deps(vim.fn.stdpath("data") .. "/site/")
 
 require("options")
-
 require("keymaps")
-
-require("themes")
-
+require("theme")
 require("dots")
 
 vim.filetype.add({
@@ -40,4 +28,17 @@ vim.filetype.add({
 	},
 })
 
+require("setup-mini")
+require("setup-telescope")
+require("setup-lsp")
+require("setup-csvview")
+require("setup-treesitter")
+require("setup-fugitive")
+MiniDeps.add("hat0uma/csvview.nvim")
+require("csvview").setup()
+require("setup-tbone")
+require("setup-gitsigns")
+require("setup-incline")
+require("setup-lualine")
+require("setup-neotree")
 -- vim: ts=2 sts=2 sw=2 et

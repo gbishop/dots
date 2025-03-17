@@ -1,3 +1,6 @@
+-- manage my dotfiles
+
+MiniDeps.add("nvim-lua/plenary.nvim")
 local Job = require("plenary.job")
 
 -- Copy the managed files to where they belong
