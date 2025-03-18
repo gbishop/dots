@@ -16,7 +16,16 @@ vim.notify = notify.make_notify({
 	INFO = { duration = 3000 },
 })
 require("mini.pairs").setup()
-require("mini.snippets").setup()
+local pick = require("mini.pick")
+pick.setup()
+vim.ui.select = pick.ui_select
+local snippets = require("mini.snippets")
+local gen_loader = snippets.gen_loader
+snippets.setup({
+	snippets = {
+		gen_loader.from_lang(),
+	},
+})
 require("mini.completion").setup({
 	delay = {
 		completion = 10 ^ 7,

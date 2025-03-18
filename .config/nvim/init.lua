@@ -28,17 +28,17 @@ vim.filetype.add({
 	},
 })
 
-require("setup-mini")
-require("setup-telescope")
-require("setup-lsp")
 require("setup-csvview")
-require("setup-treesitter")
 require("setup-fugitive")
-MiniDeps.add("hat0uma/csvview.nvim")
-require("csvview").setup()
-require("setup-tbone")
 require("setup-gitsigns")
 require("setup-incline")
+require("setup-lsp")
 require("setup-lualine")
+require("setup-mini")
 require("setup-neotree")
+require("setup-smart-splits")
+require("setup-tbone")
+require("setup-telescope")
+require("setup-treesitter")
+
 -- vim: ts=2 sts=2 sw=2 et
