@@ -1,24 +1,55 @@
+require("mini.basics").setup({
+	options = {
+		basic = true,
+		extra_ui = true,
+	},
+	mappings = {
+		basic = true,
+		windows = true,
+		move_with_alt = true,
+	},
+	autocommands = {
+		basic = true,
+		relnum_in_visual_mode = true,
+		silent = true,
+	},
+})
+
 require("mini.ai").setup()
 require("mini.align").setup({})
 require("mini.animate").setup()
 require("mini.bracketed").setup({})
 require("mini.colors").setup({})
 require("mini.comment").setup()
+local MiniFiles = require("mini.files")
+MiniFiles.setup()
+-- vim.keymap.set("n", "<leader>o", function()
+-- 	MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
+-- 	MiniFiles.reveal_cwd()
+-- end, { desc = "Open in current folder" })
+
 require("mini.icons").setup()
 require("mini.indentscope").setup({})
 require("mini.jump").setup()
 require("mini.jump2d").setup()
-local notify = require("mini.notify")
-notify.setup()
-vim.notify = notify.make_notify({
+local MiniNotify = require("mini.notify")
+MiniNotify.setup()
+vim.notify = MiniNotify.make_notify({
 	ERROR = { duration = 15000 },
 	WARN = { duration = 4000 },
 	INFO = { duration = 3000 },
 })
 require("mini.pairs").setup()
-local pick = require("mini.pick")
-pick.setup()
-vim.ui.select = pick.ui_select
+
+local MiniPick = require("mini.pick")
+MiniPick.setup()
+-- Use the mini select
+vim.ui.select = MiniPick.ui_select
+-- Allow opening files near the current one
+-- vim.keymap.set("n", "<leader>o", function()
+-- 	MiniPick.builtin.files({ cwd = vim.fn.expand("%:p:b") })
+-- end, { desc = "Open a local file" })
+
 local snippets = require("mini.snippets")
 local gen_loader = snippets.gen_loader
 snippets.setup({
@@ -26,17 +57,13 @@ snippets.setup({
 		gen_loader.from_lang(),
 	},
 })
+
 require("mini.completion").setup({
 	delay = {
 		completion = 10 ^ 7,
 		info = 100,
 		signature = 100,
 	},
-	-- lsp_completion = {
-	-- 	source_func = "omnifunc",
-	-- 	auto_setup = false,
-	-- },
-	-- set_vim_settings = true,
 })
 
 local function has_words_before()

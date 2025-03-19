@@ -11,24 +11,24 @@ vim.keymap.set(
 )
 
 --Remap for dealing with word wrap
-vim.keymap.set(
-	"n",
-	"k",
-	"v:count == 0 ? 'gk' : 'k'",
-	{ expr = true, silent = true, desc = "Move up" }
-)
-vim.keymap.set(
-	"n",
-	"j",
-	"v:count == 0 ? 'gj' : 'j'",
-	{ expr = true, silent = true, desc = "Move down" }
-)
+-- vim.keymap.set(
+-- 	"n",
+-- 	"k",
+-- 	"v:count == 0 ? 'gk' : 'k'",
+-- 	{ expr = true, silent = true, desc = "Move up" }
+-- )
+-- vim.keymap.set(
+-- 	"n",
+-- 	"j",
+-- 	"v:count == 0 ? 'gj' : 'j'",
+-- 	{ expr = true, silent = true, desc = "Move down" }
+-- )
 
 -- for jumping out of parenthesis in input mode
-vim.cmd(
-	"inoremap <silent> <C-l> <c-\\><c-n>:call searchpair('[([{]', '', '[)\\]}]', 'W')<cr>a"
-)
-
+-- vim.cmd(
+-- 	"inoremap <silent> <C-l> <c-\\><c-n>:call searchpair('[([{]', '', '[)\\]}]', 'W')<cr>a"
+-- )
+--
 -- scrolling should not paste
 vim.keymap.set({ "n", "i" }, "<MiddleMouse>", "<Nop>")
 for i = 2, 4 do
@@ -46,12 +46,12 @@ map ,e :e <C-R>=expand("%:h") . "/" <CR>
 ]])
 
 -- Diagnostic keymaps
-vim.keymap.set(
-	"n",
-	"<leader>e",
-	vim.diagnostic.open_float,
-	{ desc = "Diagnostic open float" }
-)
+-- vim.keymap.set(
+-- 	"n",
+-- 	"<leader>e",
+-- 	vim.diagnostic.open_float,
+-- 	{ desc = "Diagnostic open float" }
+-- )
 -- vim.keymap.set(
 -- 	"n",
 -- 	"[d",
@@ -59,9 +59,9 @@ vim.keymap.set(
 -- 	{ desc = "Previous diagnostic" }
 -- )
 -- vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
-vim.keymap.set(
-	"n",
-	"<leader>q",
-	vim.diagnostic.setloclist,
-	{ desc = "Diagnostic loc list" }
-)
+-- vim.keymap.set(
+-- 	"n",
+-- 	"<leader>q",
+-- 	vim.diagnostic.setloclist,
+-- 	{ desc = "Diagnostic loc list" }
+-- )
