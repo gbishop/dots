@@ -12,29 +12,34 @@ local tb = require("telescope.builtin")
 local ta = require("telescope.actions")
 local tas = require("telescope.actions.state")
 
-local function my_find_files(opts, no_ignore)
+local function my_find_files(opts, hidden)
 	opts = opts or {}
-	no_ignore = vim.F.if_nil(no_ignore, false)
+	hidden = vim.F.if_nil(hidden, false)
 	opts.attach_mappings = function(_, map)
-		map({ "n", "i" }, "<C-h>", function(prompt_bufnr) -- <C-h> to toggle modes
+		-- <C-h> to toggle modes
+		map({ "n", "i" }, "<C-h>", function(prompt_bufnr)
 			local prompt = tas.get_current_line()
 			ta.close(prompt_bufnr)
-			no_ignore = not no_ignore
+			hidden = not hidden
 			opts.default_text = prompt
-			my_find_files(opts, no_ignore)
+			my_find_files(opts, hidden)
+		end)
+		-- .. to move to parent
+		map({ "i" }, "..", function(prompt_bufnr)
+			-- cwd is only set if passed as telescope option
+			local cwd = opts.cwd or vim.loop.cwd()
+			local parent_dir = vim.fs.dirname(cwd)
+
+			ta.close(prompt_bufnr)
+			opts.prompt_title = vim.fs.basename(parent_dir)
+			opts.cwd = parent_dir
+			my_find_files(opts, hidden)
 		end)
 		return true
 	end
 
-	if no_ignore then
-		opts.no_ignore = true
-		opts.hidden = true
-		opts.prompt_title = "Find Files <ALL>"
-	else
-		opts.no_ignore = false
-		opts.hidden = false
-		opts.prompt_title = "Find Files"
-	end
+	opts.hidden = hidden
+	opts.prompt_title = opts.cwd
 	tb.find_files(opts)
 end
 
@@ -63,29 +68,6 @@ ts.setup({
 			},
 		},
 		file_ignore_patterns = { "dist" },
-	},
-	pickers = {
-		find_files = {
-			mappings = {
-				-- allow moving up to parent folder
-				i = {
-					[".."] = function(prompt_bufnr)
-						local current_picker = tas.get_current_picker(prompt_bufnr)
-						-- cwd is only set if passed as telescope option
-						local cwd = current_picker.cwd and tostring(current_picker.cwd)
-							or vim.loop.cwd()
-						local parent_dir = vim.fs.dirname(cwd)
-
-						ta.close(prompt_bufnr)
-						my_find_files({
-							prompt_title = vim.fs.basename(parent_dir),
-							cwd = parent_dir,
-							hidden = true,
-						})
-					end,
-				},
-			},
-		},
 	},
 	extensions = {
 		file_browser = {
