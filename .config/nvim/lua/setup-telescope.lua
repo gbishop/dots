@@ -56,6 +56,7 @@ local function find_files_from_project_git_root()
   if is_git_repo() then
     opts.cwd = get_git_root()
   end
+  opts.hidden = true
   my_find_files(opts)
 end
 
