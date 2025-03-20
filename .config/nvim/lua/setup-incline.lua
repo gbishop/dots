@@ -24,6 +24,9 @@ local function get_diagnostic_label(props)
 end
 
 require("incline").setup({
+  hide = {
+    cursorline = true,
+  },
   render = function(props)
     local bufname = vim.api.nvim_buf_get_name(props.buf)
     local filename = vim.fn.fnamemodify(bufname, ":t")
