@@ -12,17 +12,17 @@ local tb = require("telescope.builtin")
 local ta = require("telescope.actions")
 local tas = require("telescope.actions.state")
 
-local function my_find_files(opts, hidden)
+local function my_find_files(opts)
 	opts = opts or {}
-	hidden = vim.F.if_nil(hidden, false)
+	local hidden = vim.F.if_nil(opts.hidden, false)
 	opts.attach_mappings = function(_, map)
 		-- <C-h> to toggle modes
 		map({ "n", "i" }, "<C-h>", function(prompt_bufnr)
 			local prompt = tas.get_current_line()
 			ta.close(prompt_bufnr)
-			hidden = not hidden
+			opts.hidden = not hidden
 			opts.default_text = prompt
-			my_find_files(opts, hidden)
+			my_find_files(opts)
 		end)
 		-- .. to move to parent
 		map({ "i" }, "..", function(prompt_bufnr)
@@ -33,7 +33,7 @@ local function my_find_files(opts, hidden)
 			ta.close(prompt_bufnr)
 			opts.prompt_title = vim.fs.basename(parent_dir)
 			opts.cwd = parent_dir
-			my_find_files(opts, hidden)
+			my_find_files(opts)
 		end)
 		return true
 	end
@@ -103,10 +103,10 @@ vim.keymap.set(
 	"n",
 	"<leader>,",
 	find_files_from_project_git_root,
-	{ desc = "files in project" }
+	{ desc = "project files" }
 )
 vim.keymap.set("n", "<leader>.", function()
-	return my_find_files({ cwd = vim.fn.expand("%:p:h") }, false)
+	return my_find_files({ cwd = vim.fn.expand("%:p:h") })
 end, { desc = "local files" })
 vim.keymap.set("n", "<leader>sc", tb.commands, { desc = "Commands" })
 vim.keymap.set("n", "<leader>sd", tb.diagnostics, { desc = "Diagnostics" })
