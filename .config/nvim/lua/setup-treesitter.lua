@@ -24,6 +24,7 @@ require("nvim-treesitter.configs").setup({
 		"lua",
 		"javascript",
 		"regex",
+		"query",
 	},
 	highlight = {
 		enable = true, -- false will disable the whole extension
