@@ -61,7 +61,6 @@ vim.filetype.add({
 require("setup-csvview")
 require("setup-fugitive")
 require("setup-gitsigns")
-require("setup-gp")
 require("setup-incline")
 require("setup-lsp")
 require("setup-lualine")

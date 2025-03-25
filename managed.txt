@@ -2,6 +2,7 @@
 .bashrc
 .config/kitty/
 .config/nvim/
+.config/nvim-nightly/
 .config/autostart/
 .config/solaar/
 .fonts/
@@ -20,6 +21,8 @@ bin/autossh_work.sh
 bin/log
 bin/mnencode
 bin/mnpassword
+bin/nightlyNeoVim
+bin/Nvim
 bin/stableNeoVim
 bin/tmux-paste-to-python
 bin/update
