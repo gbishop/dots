@@ -90,6 +90,12 @@ local on_attach = function(_, bufnr)
     tb.lsp_document_symbols,
     { buffer = bufnr, desc = "Document symbols" }
   )
+  vim.keymap.set(
+    "n",
+    "<leader>e",
+    vim.diagnostic.open_float,
+    { buffer = bufnr, desc = "Line diagnostics" }
+  )
   vim.api.nvim_buf_create_user_command(bufnr, "Format", function()
     vim.lsp.buf.format({ async = true })
   end, {})
