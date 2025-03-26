@@ -185,9 +185,6 @@ miniclue.setup({
     miniclue.gen_clues.registers(),
     miniclue.gen_clues.windows(),
     miniclue.gen_clues.z(),
-    { mode = "n", keys = "<Leader>l", desc = "+LSP" },
-    { mode = "n", keys = "<Leader>d", desc = "+Debug" },
-    { mode = "n", keys = "<Leader>s", desc = "+Search" },
     miniclue.gen_clues.text_objects(),
   },
 })
