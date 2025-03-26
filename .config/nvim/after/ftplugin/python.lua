@@ -1,4 +1,3 @@
-MiniDeps.add("tpope/vim-tbone")
 vim.keymap.set(
   "n",
   "<leader>p",
