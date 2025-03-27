@@ -16,7 +16,7 @@ vim.notify = MiniNotify.make_notify({
   WARN = { duration = 4000 },
   INFO = { duration = 3000 },
 })
-require("mini.pairs").setup()
+-- require("mini.pairs").setup()
 
 local MiniPick = require("mini.pick")
 MiniPick.setup()

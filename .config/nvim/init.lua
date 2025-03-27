@@ -70,3 +70,6 @@ require("setup-neotree")
 MiniDeps.add("tpope/vim-tbone")
 require("setup-telescope")
 require("setup-treesitter")
+
+MiniDeps.add("windwp/nvim-autopairs")
+require("nvim-autopairs").setup()
