@@ -2,6 +2,7 @@ local add = MiniDeps.add
 
 add("nvim-telescope/telescope.nvim")
 add("Fildo7525/pretty_hover")
+add("mawkler/refjump.nvim")
 add({
   source = "neovim/nvim-lspconfig",
   depends = {
@@ -36,6 +37,7 @@ local lspconfig = require("lspconfig")
 local tb = require("telescope.builtin")
 local pretty_hover = require("pretty_hover")
 pretty_hover.setup()
+require("refjump").setup()
 
 local on_attach = function(_, bufnr)
   -- for MiniCompletion
