@@ -26,7 +26,7 @@ require("mini.basics").setup({
   },
   mappings = {
     basic = true,
-    windows = true,
+    windows = false,
     move_with_alt = true,
   },
   autocommands = {
@@ -67,8 +67,8 @@ require("setup-lsp")
 require("setup-lualine")
 require("setup-mini")
 require("setup-neotree")
-MiniDeps.add("tpope/vim-tbone")
 require("setup-telescope")
+require("setup-tmux")
 require("setup-treesitter")
 
 MiniDeps.add("windwp/nvim-autopairs")
