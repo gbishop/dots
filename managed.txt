@@ -26,4 +26,6 @@ bin/Nvim
 bin/stableNeoVim
 bin/tmux-paste-to-python
 bin/update
+bin/updateKitty.sh
+bin/updateTmux.sh
 bin/yank
