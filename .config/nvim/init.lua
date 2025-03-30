@@ -70,6 +70,7 @@ require("setup-neotree")
 require("setup-telescope")
 require("setup-tmux")
 require("setup-treesitter")
+require("setup-whichkey")
 
 MiniDeps.add("windwp/nvim-autopairs")
 require("nvim-autopairs").setup()
