@@ -45,8 +45,10 @@ require("nvim-treesitter.configs").setup({
   autotag = {
     enable = true,
     filetypes = {
+      "css",
       "html",
       "javascript",
+      "lua",
       "typescript",
       "python",
     },
@@ -101,5 +103,11 @@ require("nvim-treesitter.configs").setup({
       goto_node = "<cr>",
       show_help = "?",
     },
+  },
+})
+MiniDeps.add("RRethy/nvim-treesitter-textsubjects")
+require("nvim-treesitter-textsubjects").configure({
+  keymaps = {
+    ["."] = "textsubjects-smart",
   },
 })
