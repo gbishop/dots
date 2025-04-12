@@ -20,11 +20,8 @@ dedup() {
 
 PATH=$(dedup /home/gb/bin:/home/gb/.local/bin:$PATH)
 
-# Add python3.8
-PATH=$(dedup $PATH)
-
-export PYTHONPATH=/home/gb/python/extensions:$PYTHONPATH
-PYTHONPATH=$(dedup $PYTHONPATH)
+# export PYTHONPATH=/home/gb/python/extensions:$PYTHONPATH
+# PYTHONPATH=$(dedup $PYTHONPATH)
 
 export MANPATH=$(dedup $MANPATH:/home/gb/share/man)
 
@@ -163,13 +160,10 @@ export NVM_DIR="/home/gb/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# initialize python virtual env
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-[ -f ~/.virtual.sh ] && source ~/.virtual.sh
-if [ -f ~/virtualenvs/work/bin/python ]; then
-  setv work
-fi
+[ -f ~/python/bin/activate ] && source ~/python/bin/activate
 
+#
 [ -f ~/.cargo.env ] && . ~/.cargo/env
 
 export PATH="$HOME/.cargo/bin:$PATH"
