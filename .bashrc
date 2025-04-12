@@ -145,7 +145,9 @@ fi
 
 
 # configure fzf
-source /usr/share/doc/fzf/examples/key-bindings.bash
+if [ -f /usr/share/doc/fzf/examples/key-bindings.bash ]; then
+  source /usr/share/doc/fzf/examples/key-bindings.bash
+fi
 
 # try redefining their function to include all previous
 # __fzf_history__() (
@@ -153,7 +155,7 @@ source /usr/share/doc/fzf/examples/key-bindings.bash
 # )
 #
 # load up cd hack
-[ -f ~/dotfiles/z/z.sh ] && source ~/dotfiles/z/z.sh
+[ -f ~/dots/z/z.sh ] && source ~/dots/z/z.sh
 
 # node version manager
 export NVM_DIR="/home/gb/.nvm"
