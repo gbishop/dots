@@ -1,7 +1,10 @@
 local add = MiniDeps.add
 
 add("nvim-telescope/telescope.nvim")
-add("Fildo7525/pretty_hover")
+add({
+  source = "Fildo7525/pretty_hover",
+  checkout = "1ce623f9b6ff5252c02b31c3bef531034c24c1dd",
+})
 add("mawkler/refjump.nvim")
 add({
   source = "neovim/nvim-lspconfig",
