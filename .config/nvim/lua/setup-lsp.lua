@@ -1,10 +1,6 @@
 local add = MiniDeps.add
 
 add("nvim-telescope/telescope.nvim")
-add({
-  source = "Fildo7525/pretty_hover",
-  checkout = "1ce623f9b6ff5252c02b31c3bef531034c24c1dd",
-})
 add("mawkler/refjump.nvim")
 add({
   source = "neovim/nvim-lspconfig",
@@ -38,14 +34,12 @@ require("mason-tool-installer").setup({
 
 local lspconfig = require("lspconfig")
 local tb = require("telescope.builtin")
-local pretty_hover = require("pretty_hover")
-pretty_hover.setup()
 require("refjump").setup()
 
-local on_attach = function(_, bufnr)
-  -- for MiniCompletion
-  -- vim.o.omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
+-- apparently required for border on hover
+vim.o.winborder = "rounded"
 
+local on_attach = function(_, bufnr)
   vim.keymap.set(
     "n",
     "gD",
@@ -58,7 +52,6 @@ local on_attach = function(_, bufnr)
     vim.lsp.buf.definition,
     { buffer = bufnr, desc = "Jump to definition" }
   )
-  vim.keymap.set("n", "K", pretty_hover.hover, { buffer = bufnr, desc = "LSP hover" })
   vim.keymap.set(
     "n",
     "gi",
