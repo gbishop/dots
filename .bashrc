@@ -155,7 +155,7 @@ fi
 # )
 #
 # load up cd hack
-[ -f ~/dots/z/z.sh ] && source ~/dots/z/z.sh
+[ -f ~/dots/z.sh/z.sh ] && source ~/dots/z.sh/z.sh
 
 # node version manager
 export NVM_DIR="/home/gb/.nvm"
