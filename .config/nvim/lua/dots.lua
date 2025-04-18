@@ -13,6 +13,8 @@ local sync = function()
     },
     cwd = "/home/gb/dots",
   }):sync()
+  -- let me know when sync happens
+  vim.notify("sync", vim.log.levels.info)
 end
 
 local dots = { sync = sync }
