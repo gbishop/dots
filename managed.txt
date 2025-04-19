@@ -9,9 +9,6 @@
 .gitconfig
 .gitignore
 .inputrc
-.ipython/
-.ipyt/
-.jupyter/
 .profile
 .ssh/config
 .terminfo/
