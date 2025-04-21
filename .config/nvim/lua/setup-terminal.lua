@@ -3,8 +3,8 @@ Attempt to use the neovim terminal
 
 TODO:
 
-  edit commands in bash or maybe better make it easy to create commands in
-  a scratch buffer and ship them to bash
+  fc works! edit commands in bash or maybe better make it easy to create
+  commands in a scratch buffer and ship them to bash
 
   get an ipython repl working in terminal
 
@@ -27,16 +27,32 @@ vim.keymap.set("n", "<leader>th", function()
   vim.cmd("horizontal terminal")
 end, { desc = "Open a terminal in a horizontal split" })
 
+local group = vim.api.nvim_create_augroup("custom-term-open", { clear = true })
 -- start in input mode
 vim.api.nvim_create_autocmd("BufEnter", {
   desc = "set terminal to insert mode when entering",
   pattern = "term://*",
-  group = vim.api.nvim_create_augroup("custom-term-open", { clear = true }),
+  group = group,
   callback = function()
     -- using schedule appears to be required when coming from telescope
-    vim.schedule(vim.cmd.startinsert)
+    vim.schedule(function()
+      if vim.startswith(vim.api.nvim_buf_get_name(0), "term://") then
+        vim.cmd.startinsert()
+      end
+    end)
   end,
 })
+
+-- clear the bash-fc buffer when I leave it
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--   desc = "set terminal to insert mode when entering",
+--   pattern = "bash-fc.*",
+--   group = group,
+--   callback = function()
+--     -- using schedule appears to be required when coming from telescope
+--     vim.bo.bufhidden = "wipe"
+--   end,
+-- })
 
 -- local ipython = require("terminal").terminal:new({
 --   layout = { open_cmd = "botright vertical new" },
