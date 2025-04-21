@@ -92,8 +92,8 @@ export EDITOR=vim
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
-
-PS1='$ '
+# mark prompts for neovim terminal
+PS1='\033]133;A\007$ '
 SHOW_HOST=''
 if [ -n "$SSH_CLIENT" -o $HOST != gb -a $HOST != penguin ]; then
   SHOW_HOST="$hcolor\h:$(nocolor)"
@@ -111,10 +111,10 @@ if [ -f /usr/bin/git ]; then
     fi
     case "$TERM" in
     xterm*|screen*|tmux*)
-      export PS1="$SHOW_HOST$dcolor\W$(nocolor)$gcolor"'`__git_ps1 " %s"`'"$(nocolor)\$ "
+      export PS1="$SHOW_HOST$dcolor\W$(nocolor)$gcolor"'`__git_ps1 " %s"`'"$(nocolor)$PS1"
         ;;
     *)
-        export PS1="$SHOW_HOST"'\W`__git_ps1`$ '
+        export PS1="$SHOW_HOST"'\W`__git_ps1`$PS1'
         ;;
     esac
 fi
