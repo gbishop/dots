@@ -87,7 +87,11 @@ shopt -s cmdhist
 PROMPT_COMMAND="history -a;"
 
 # set the EDITOR variable so I'm in control
-export EDITOR=vim
+if [[ -v NVIM ]]; then
+  export EDITOR="nvr-scratch"
+else
+  export EDITOR="vim"
+fi
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"

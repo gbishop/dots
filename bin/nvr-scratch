@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# invoke nvr on a scratch buffer
+
+nvr -cc split --remote-wait +'set bufhidden=delete' $@
