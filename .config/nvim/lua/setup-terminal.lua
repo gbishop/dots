@@ -36,23 +36,13 @@ vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
     -- using schedule appears to be required when coming from telescope
     vim.schedule(function()
+      -- check again
       if vim.startswith(vim.api.nvim_buf_get_name(0), "term://") then
         vim.cmd.startinsert()
       end
     end)
   end,
 })
-
--- clear the bash-fc buffer when I leave it
--- vim.api.nvim_create_autocmd("BufEnter", {
---   desc = "set terminal to insert mode when entering",
---   pattern = "bash-fc.*",
---   group = group,
---   callback = function()
---     -- using schedule appears to be required when coming from telescope
---     vim.bo.bufhidden = "wipe"
---   end,
--- })
 
 -- local ipython = require("terminal").terminal:new({
 --   layout = { open_cmd = "botright vertical new" },
