@@ -44,17 +44,11 @@ local function my_find_files(opts)
 end
 
 local function find_files_from_project_git_root()
-  local function is_git_repo()
-    vim.fn.system("git rev-parse --is-inside-work-tree")
-    return vim.v.shell_error == 0
-  end
-  local function get_git_root()
-    local dot_git_path = vim.fn.finddir(".git", "./;")
-    return vim.fn.fnamemodify(dot_git_path, ":h")
-  end
+  local path = vim.api.nvim_buf_get_name(0)
+  local git = vim.fn.finddir(".git", path .. ";")
   local opts = {}
-  if is_git_repo() then
-    opts.cwd = get_git_root()
+  if git ~= "" then
+    opts.cwd = vim.fn.fnamemodify(git, ":h")
   end
   opts.hidden = true
   my_find_files(opts)
