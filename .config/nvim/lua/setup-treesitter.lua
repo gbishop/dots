@@ -1,15 +1,13 @@
 MiniDeps.add({
   source = "nvim-treesitter/nvim-treesitter",
-  depends = {
-    "nvim-treesitter/playground",
-    "nvim-treesitter/nvim-treesitter-textobjects",
-  },
   hooks = {
     post_checkout = function()
       vim.cmd("TSUpdate")
     end,
   },
 })
+MiniDeps.add("nvim-treesitter/playground")
+MiniDeps.add("nvim-treesitter/nvim-treesitter-textobjects")
 require("nvim-treesitter.configs").setup({
   ensure_installed = {
     "markdown",
