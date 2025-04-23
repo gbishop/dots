@@ -28,9 +28,6 @@ export MANPATH=$(dedup $MANPATH:/home/gb/share/man)
 # Add ruby
 PATH=$(dedup $PATH:/home/gb/.gem/ruby/2.7.0/bin)
 
-# Add lua-language-server why do I need this?
-# PATH=$(dedup $PATH:/home/gb/.local/share/nvim/lsp_servers/sumneko_lua/extension/server/bin/)
-
 # If not running interactively, quit
 [ -z "$PS1" ] && return
 
@@ -86,19 +83,8 @@ shopt -s histappend
 shopt -s cmdhist
 PROMPT_COMMAND="history -a;"
 
-# when in a neovim terminal sync the directory and enable fc
-if [[ -v NVIM ]]; then
-  export EDITOR="nvr-scratch"
-  function print_osc7() {
-    printf "\033]7;file://$HOSTNAME/$PWD\033\\"
-  }
-  PROMPT_COMMAND="print_osc7${PROMPT_COMMAND:+;$PROMPT_COMMAND}"
-  # mark the beginning of prompts
-  PS1='\033]133;A\007$ '
-else
-  export EDITOR="vim"
-  PS1='$ '
-fi
+export EDITOR="vim"
+PS1='$ '
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
