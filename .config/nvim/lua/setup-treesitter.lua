@@ -1,6 +1,6 @@
 MiniDeps.add({
   source = "nvim-treesitter/nvim-treesitter",
-  dependencies = {
+  depends = {
     "nvim-treesitter/playground",
     "nvim-treesitter/nvim-treesitter-textobjects",
   },
@@ -25,6 +25,7 @@ require("nvim-treesitter.configs").setup({
     "javascript",
     "regex",
     "query",
+    "python",
   },
   highlight = {
     enable = true, -- false will disable the whole extension
@@ -63,6 +64,7 @@ require("nvim-treesitter.configs").setup({
         ["if"] = "@function.inner",
         ["ac"] = "@class.outer",
         ["ic"] = "@class.inner",
+        ["as"] = { query = "@statement.outer", desc = "Select statement" },
       },
     },
     move = {
@@ -106,8 +108,3 @@ require("nvim-treesitter.configs").setup({
   },
 })
 MiniDeps.add("RRethy/nvim-treesitter-textsubjects")
-require("nvim-treesitter-textsubjects").configure({
-  keymaps = {
-    ["."] = "textsubjects-smart",
-  },
-})
