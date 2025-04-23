@@ -1,4 +1,4 @@
-require("mini.ai").setup()
+-- require("mini.ai").setup()
 require("mini.align").setup({})
 require("mini.animate").setup()
 require("mini.bracketed").setup({})
