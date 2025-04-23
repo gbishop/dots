@@ -86,18 +86,23 @@ shopt -s histappend
 shopt -s cmdhist
 PROMPT_COMMAND="history -a;"
 
-# set the EDITOR variable so I'm in control
+# when in a neovim terminal sync the directory and enable fc
 if [[ -v NVIM ]]; then
   export EDITOR="nvr-scratch"
+  function print_osc7() {
+    printf "\033]7;file://$HOSTNAME/$PWD\033\\"
+  }
+  PROMPT_COMMAND="print_osc7${PROMPT_COMMAND:+;$PROMPT_COMMAND}"
+  # mark the beginning of prompts
+  PS1='\033]133;A\007$ '
 else
   export EDITOR="vim"
+  PS1='$ '
 fi
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
-# mark prompts for neovim terminal
-PS1='\033]133;A\007$ '
 SHOW_HOST=''
 if [ -n "$SSH_CLIENT" -o $HOST != gb -a $HOST != penguin ]; then
   SHOW_HOST="$hcolor\h:$(nocolor)"
