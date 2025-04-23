@@ -1,12 +1,18 @@
 vim.keymap.set(
   "n",
   "<leader>p",
-  "vap:Twrite right<CR>}",
-  { desc = "Send chunk to python", silent = true }
+  "Vasgy`>j:silent !tmux-paste-to-python<CR>",
+  { desc = "Send chunk to python move", silent = true, remap = true }
+)
+vim.keymap.set(
+  "v",
+  "<leader>p",
+  "gy`>j:silent !tmux-paste-to-python<CR>",
+  { desc = "Send selection to python move", silent = true, remap = true }
 )
 vim.keymap.set(
   "n",
   "<leader>P",
-  "vap:Twrite right<CR>",
-  { desc = "Send chunk to python,stay", silent = true }
+  "Vasgy:silent !tmux-paste-to-python<CR>",
+  { desc = "Send chunk to python stay", silent = true, remap = true }
 )
