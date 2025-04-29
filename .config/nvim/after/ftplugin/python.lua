@@ -1,7 +1,7 @@
 vim.keymap.set(
   "n",
   "<leader>p",
-  "Vasgy`>j:silent !tmux-paste-to-python<CR>",
+  "Vasgy`>/^.<cr>:silent !tmux-paste-to-python<CR>",
   { desc = "Send chunk to python move", silent = true, remap = true }
 )
 vim.keymap.set(
