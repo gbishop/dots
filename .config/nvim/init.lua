@@ -45,7 +45,7 @@ vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.expandtab = true
 vim.opt.hlsearch = false -- disable search highlight
-
+vim.g.clipboard = "osc52"
 vim.opt.mousescroll = "ver:1"
 
 require("keymaps")
