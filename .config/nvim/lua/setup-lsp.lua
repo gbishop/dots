@@ -23,6 +23,9 @@ require("mason-lspconfig").setup({
     "pyright",
     "ts_ls",
   },
+  automatic_enable = {
+    exclude = { "pyright" },
+  },
 })
 require("mason-tool-installer").setup({
   ensure_installed = {
