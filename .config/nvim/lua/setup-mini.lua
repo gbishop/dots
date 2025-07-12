@@ -10,7 +10,11 @@ require("mini.indentscope").setup({})
 require("mini.jump").setup()
 require("mini.jump2d").setup()
 local MiniNotify = require("mini.notify")
-MiniNotify.setup()
+MiniNotify.setup({
+  lsp_progress = {
+    enable = false,
+  },
+})
 vim.notify = MiniNotify.make_notify({
   ERROR = { duration = 15000 },
   WARN = { duration = 4000 },
