@@ -113,7 +113,7 @@ local servers = {
   "jsonls",
   "marksman",
   "pyright",
-  "ts_ls",
+  -- "ts_ls",
 }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup({
