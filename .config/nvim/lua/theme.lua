@@ -1,6 +1,9 @@
 -- theme setup
 
-MiniDeps.add("https://gitlab.com/bartekjaszczak/finale-nvim")
+MiniDeps.add({
+  source = "https://github.com/bartekjaszczak/finale-nvim",
+  checkout = "0.1",
+})
 MiniDeps.add("nvim-lua/plenary.nvim")
 
 vim.o.background = "dark"
