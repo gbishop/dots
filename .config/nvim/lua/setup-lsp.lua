@@ -23,7 +23,6 @@ require("mason-lspconfig").setup({
     "pyright",
     "ts_ls",
   },
-  automatic_enable = false,
 })
 require("mason-tool-installer").setup({
   ensure_installed = {
@@ -40,85 +39,71 @@ require("refjump").setup()
 -- apparently required for border on hover
 vim.o.winborder = "rounded"
 
-local on_attach = function(_, bufnr)
-  vim.keymap.set(
-    "n",
-    "gD",
-    vim.lsp.buf.declaration,
-    { buffer = bufnr, desc = "Jump to declaration" }
-  )
-  vim.keymap.set(
-    "n",
-    "gd",
-    vim.lsp.buf.definition,
-    { buffer = bufnr, desc = "Jump to definition" }
-  )
-  vim.keymap.set(
-    "n",
-    "gi",
-    vim.lsp.buf.implementation,
-    { buffer = bufnr, desc = "Jump to implementation" }
-  )
-  vim.keymap.set(
-    "n",
-    "gt",
-    vim.lsp.buf.type_definition,
-    { buffer = bufnr, desc = "Jump to type definition" }
-  )
-  vim.keymap.set(
-    "n",
-    "<leader>lr",
-    vim.lsp.buf.rename,
-    { buffer = bufnr, desc = "LSP rename" }
-  )
-  vim.keymap.set(
-    "n",
-    "gr",
-    vim.lsp.buf.references,
-    { buffer = bufnr, desc = "Get references" }
-  )
-  vim.keymap.set(
-    "n",
-    "<leader>la",
-    vim.lsp.buf.code_action,
-    { buffer = bufnr, desc = "LSP code action" }
-  )
-  vim.keymap.set(
-    "n",
-    "<leader>so",
-    tb.lsp_document_symbols,
-    { buffer = bufnr, desc = "Document symbols" }
-  )
-  vim.keymap.set(
-    "n",
-    "<leader>e",
-    vim.diagnostic.open_float,
-    { buffer = bufnr, desc = "Line diagnostics" }
-  )
-  vim.api.nvim_buf_create_user_command(bufnr, "Format", function()
-    vim.lsp.buf.format({ async = true })
-  end, {})
-end
+local LspAttachGroup = vim.api.nvim_create_augroup("LspAttachGroup", { clear = true })
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
--- Enable the following language servers
-local servers = {
-  "cssls",
-  "emmet_ls",
-  "html",
-  "jsonls",
-  "marksman",
-  "pyright",
-  "ts_ls",
-}
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-  })
-end
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = LspAttachGroup,
+  callback = function(args)
+    local bufnr = args.buf
+    vim.keymap.set(
+      "n",
+      "gD",
+      vim.lsp.buf.declaration,
+      { buffer = bufnr, desc = "Jump to declaration" }
+    )
+    vim.keymap.set(
+      "n",
+      "gd",
+      vim.lsp.buf.definition,
+      { buffer = bufnr, desc = "Jump to definition" }
+    )
+    vim.keymap.set(
+      "n",
+      "gi",
+      vim.lsp.buf.implementation,
+      { buffer = bufnr, desc = "Jump to implementation" }
+    )
+    vim.keymap.set(
+      "n",
+      "gt",
+      vim.lsp.buf.type_definition,
+      { buffer = bufnr, desc = "Jump to type definition" }
+    )
+    vim.keymap.set(
+      "n",
+      "<leader>lr",
+      vim.lsp.buf.rename,
+      { buffer = bufnr, desc = "LSP rename" }
+    )
+    vim.keymap.set(
+      "n",
+      "gr",
+      vim.lsp.buf.references,
+      { buffer = bufnr, desc = "Get references" }
+    )
+    vim.keymap.set(
+      "n",
+      "<leader>la",
+      vim.lsp.buf.code_action,
+      { buffer = bufnr, desc = "LSP code action" }
+    )
+    vim.keymap.set(
+      "n",
+      "<leader>so",
+      tb.lsp_document_symbols,
+      { buffer = bufnr, desc = "Document symbols" }
+    )
+    vim.keymap.set(
+      "n",
+      "<leader>e",
+      vim.diagnostic.open_float,
+      { buffer = bufnr, desc = "Line diagnostics" }
+    )
+    vim.api.nvim_buf_create_user_command(bufnr, "Format", function()
+      vim.lsp.buf.format({ async = true })
+    end, {})
+  end,
+})
 
 lspconfig.intelephense.setup({
   settings = {
@@ -179,80 +164,17 @@ lspconfig.intelephense.setup({
     },
   },
 })
-
--- Example custom server
--- Make runtime files discoverable to the server
-local runtime_path = vim.split(package.path, ";")
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
-
-lspconfig.lua_ls.setup({
-  on_attach = on_attach,
-  -- capabilities = capabilities,
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = "LuaJIT",
-        -- Setup your lua path
-        path = runtime_path,
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = { "vim" },
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = {
-          vim.api.nvim_get_runtime_file("", true),
-          vim.fn.expand("$VIMRUNTIME/lua") < vim.fn.expand("$VIMRUNTIME/lua/vim/lsp"),
-          "${3rd}/luv/library",
-        },
-      },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false,
-      },
-      format = {
-        enable = false,
-      },
-    },
-  },
-})
-
 MiniDeps.add({
-  source = "nvimtools/none-ls.nvim",
-  name = "null_ls",
-  depends = {
-    "nvim-lua/plenary.nvim",
-  },
+  source = "stevearc/conform.nvim",
 })
-local null_ls = require("null-ls")
-local formatting = null_ls.builtins.formatting
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
-null_ls.setup({
-  sources = {
-    formatting.black,
-    formatting.prettierd,
-    formatting.stylua,
+require("conform").setup({
+  formatters_by_ft = {
+    lua = { "stylua" },
+    python = { "black" },
+    javascript = { "prettierd" },
   },
-  on_attach = function(client, bufnr)
-    if client.supports_method("textDocument/formatting") then
-      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        group = augroup,
-        buffer = bufnr,
-        callback = function()
-          vim.lsp.buf.format({
-            bufnr = bufnr,
-            async = false,
-            filter = function(fclient)
-              return fclient.name == "null-ls"
-            end,
-          })
-        end,
-      })
-    end
-  end,
+  format_on_save = {
+    timeout_ms = 500,
+    lsp_format = "fallback",
+  },
 })
