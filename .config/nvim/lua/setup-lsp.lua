@@ -23,9 +23,7 @@ require("mason-lspconfig").setup({
     "pyright",
     "ts_ls",
   },
-  automatic_enable = {
-    exclude = { "pyright" },
-  },
+  automatic_enable = false,
 })
 require("mason-tool-installer").setup({
   ensure_installed = {
@@ -113,7 +111,7 @@ local servers = {
   "jsonls",
   "marksman",
   "pyright",
-  -- "ts_ls",
+  "ts_ls",
 }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup({
