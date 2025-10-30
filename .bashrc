@@ -158,7 +158,7 @@ export NVM_DIR="/home/gb/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-[ -f ~/python/bin/activate ] && source ~/python/bin/activate
+[ -f ~/python3.13/bin/activate ] && source ~/python3.13/bin/activate
 
 #
 [ -f ~/.cargo.env ] && . ~/.cargo/env
