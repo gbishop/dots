@@ -45,7 +45,8 @@ vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.expandtab = true
 vim.opt.hlsearch = false -- disable search highlight
-
+-- Maybe make this depend on ssh?
+-- vim.g.clipboard = "xclip"
 vim.opt.mousescroll = "ver:1"
 
 require("keymaps")

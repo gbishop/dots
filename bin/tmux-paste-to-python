@@ -3,9 +3,10 @@
 # find the pane with python running and paste the buffer to it
 # part of my vim python hack
 
+tmux load-buffer -b paste -
 pane=`tmux list-panes -F '#{pane_current_command} #{pane_id}' | awk '/python3/ {print $2}'`
 echo pane $pane
-tmux paste-buffer -p -t $pane
+tmux paste-buffer -b paste -p -t $pane
 tmux send-keys -t $pane Escape Enter
 
 # tmux send-keys -t $pane C-V
