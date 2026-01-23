@@ -37,9 +37,12 @@ vim.keymap.set("n", "<leader>R", function()
 end, { desc = "Format a recipe", buffer = true })
 
 local function format_to_bullet()
-  vim.cmd("normal! (")
   local bufnr = 0
   local cursor_pos = vim.api.nvim_win_get_cursor(0)
+  if cursor_pos[2] ~= 0 then
+    vim.cmd("normal! (")
+    cursor_pos = vim.api.nvim_win_get_cursor(0)
+  end
   local line_num = cursor_pos[1] - 1
   local line_content = vim.api.nvim_buf_get_lines(bufnr, line_num, line_num + 1, false)[1]
 
