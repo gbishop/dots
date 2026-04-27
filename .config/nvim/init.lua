@@ -75,3 +75,5 @@ require("setup-whichkey")
 
 MiniDeps.add("windwp/nvim-autopairs")
 require("nvim-autopairs").setup()
+
+vim.opt.virtualedit = ""
