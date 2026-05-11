@@ -6,6 +6,10 @@ MiniDeps.add({
 })
 MiniDeps.add("nvim-lua/plenary.nvim")
 
+MiniDeps.add({
+  source = "projekt0n/github-nvim-theme",
+})
+
 vim.o.background = "dark"
 
 vim.cmd("colorscheme finale")
@@ -53,22 +57,22 @@ local function adjustColors()
       "set",
       "-g",
       "window-active-style",
-      string.format("fg=#%x bg=#%x", activeFG, activeBG),
+      string.format("fg=#%06x bg=#%06x", activeFG, activeBG),
       ";",
       "set",
       "-g",
       "window-style",
-      string.format("fg=#%x bg=#%x", activeFG, inactiveBG),
+      string.format("fg=#%06x bg=#%06x", activeFG, inactiveBG),
       ";",
       "set",
       "-g",
       "pane-border-style",
-      string.format("fg=#%x bg=#%x", activeFG, inactiveBG),
+      string.format("fg=#%06x bg=#%06x", activeFG, inactiveBG),
       ";",
       "set",
       "-g",
       "pane-active-border-style",
-      string.format("fg=#%x bg=#%x", activeFG, inactiveBG),
+      string.format("fg=#%06x bg=#%06x", activeFG, inactiveBG),
     },
   }):sync()
 
