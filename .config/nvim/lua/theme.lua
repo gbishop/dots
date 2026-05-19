@@ -12,7 +12,7 @@ MiniDeps.add({
 
 vim.o.background = "dark"
 
-vim.cmd("colorscheme finale")
+vim.cmd("colorscheme github_dark_high_contrast")
 vim.cmd("set cursorline")
 
 --
