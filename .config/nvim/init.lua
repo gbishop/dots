@@ -77,3 +77,5 @@ MiniDeps.add("windwp/nvim-autopairs")
 require("nvim-autopairs").setup()
 
 vim.opt.virtualedit = ""
+
+require("setup-bake")
