@@ -32,7 +32,21 @@ require("mason-tool-installer").setup({
   },
 })
 
-local lspconfig = require("lspconfig")
+vim.lsp.config.lua_ls = {
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server you are using LuaJIT (Neovim's runtime)
+        version = "LuaJIT",
+      },
+      diagnostics = {
+        globals = { "vim" },
+        disable = { "redefined-local" },
+      },
+    },
+  },
+}
+
 local tb = require("telescope.builtin")
 require("refjump").setup()
 
