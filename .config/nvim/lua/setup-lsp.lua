@@ -26,7 +26,6 @@ require("mason-lspconfig").setup({
 })
 require("mason-tool-installer").setup({
   ensure_installed = {
-    "black",
     "prettierd",
     "stylua",
   },
