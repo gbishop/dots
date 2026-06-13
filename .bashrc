@@ -20,13 +20,7 @@ dedup() {
 
 PATH=$(dedup /home/gb/bin:/home/gb/.local/bin:$PATH)
 
-# export PYTHONPATH=/home/gb/python/extensions:$PYTHONPATH
-# PYTHONPATH=$(dedup $PYTHONPATH)
-
 export MANPATH=$(dedup $MANPATH:/home/gb/share/man)
-
-# Add ruby
-PATH=$(dedup $PATH:/home/gb/.gem/ruby/2.7.0/bin)
 
 # If not running interactively, quit
 [ -z "$PS1" ] && return
@@ -55,6 +49,11 @@ session="$(sed s/penguin/CB/ <<< $HOST)"
 case $TERM in
     rxvt-unicode-256color | xterm-kitty)
       /home/gb/bin/log TMUX is $TMUX
+      if [ $HOST == penguin ]; then
+        killall xcape
+        /home/gb/bin/log running xcape
+        xcape -e Control_L=Escape
+      fi
 	[ -z "$TMUX" -a ! -f "notmux" ] && exec tmux -2 new-session -A -s $session
 	;;
 esac
@@ -87,7 +86,7 @@ PS1='$ '
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
 SHOW_HOST=''
-if [ -n "$SSH_CLIENT" -o $HOST != gb -a $HOST != penguin ]; then
+if [ -n "$SSH_CLIENT" -a $HOST != carbon ]; then
   SHOW_HOST="$hcolor\h:$(nocolor)"
 fi
 
@@ -110,10 +109,6 @@ if [ -f /usr/bin/git ]; then
         ;;
     esac
 fi
-# set the pane title for my ssh hack
-# if [ -n "$TMUX" -o "$TERM" = "tmux-256color" ]; then
-#     export PS1=$PS1'\[\e]2;\h:\w\e\\\ek\h:\W\e\\\]'
-# fi
 
 # Alias definitions.
 alias ls='ls -F --hide=__pycache__ '
@@ -141,11 +136,6 @@ if [ -f /usr/share/doc/fzf/examples/key-bindings.bash ]; then
   source /usr/share/doc/fzf/examples/key-bindings.bash
 fi
 
-# try redefining their function to include all previous
-# __fzf_history__() (
-#   cat ~/.persistent_history | $(__fzfcmd) +s --tac +m -n2..,.. --tiebreak=index --toggle-sort=ctrl-r
-# )
-#
 # load up cd hack
 [ -f ~/dots/z.sh/z.sh ] && source ~/dots/z.sh/z.sh
 
@@ -161,11 +151,7 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 [ -f ~/.cargo.env ] && . ~/.cargo/env
 
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$PATH:$HOME/.local/kitty.app/bin"
 PATH=$(dedup $PATH)
-
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-
 
 /home/gb/bin/log .bashrc ends
