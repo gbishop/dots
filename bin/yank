@@ -29,7 +29,7 @@ test $len -gt $max && echo "$0: input is $(( len - max )) bytes too long" >&2
 esc="\033]52;c;$( printf %s "$buf" | head -c $max | base64 | tr -d '\r\n' )\a"
 printf "$esc"
 
-esc="\033Ptmux;\033$esc\033\\"
+# esc="\033Ptmux;\033$esc\033\\"
 
 printf "$esc"
 
