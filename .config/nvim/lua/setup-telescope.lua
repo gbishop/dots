@@ -107,6 +107,13 @@ vim.keymap.set("n", "<leader>sc", tb.commands, { desc = "Commands" })
 vim.keymap.set("n", "<leader>sd", tb.diagnostics, { desc = "Diagnostics" })
 vim.keymap.set("n", "<leader>sf", my_find_files, { desc = "files" })
 vim.keymap.set("n", "<leader>sg", tb.live_grep, { desc = "live grep" })
+vim.keymap.set("n", "<leader>sG", function()
+  tb.live_grep({
+    additional_args = function(_)
+      return { "--hidden", "--glob", "!**/.git/*" }
+    end,
+  })
+end, { desc = "live grep hidden" })
 vim.keymap.set("n", "<leader>sh", tb.help_tags, { desc = "help tags" })
 vim.keymap.set("n", "<leader>sk", tb.keymaps, { desc = "Key Maps" })
 vim.keymap.set("n", "<leader>sr", tb.lsp_references, { desc = "lsp references" })
