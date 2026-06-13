@@ -86,7 +86,7 @@ PS1='$ '
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
 SHOW_HOST=''
-if [ -n "$SSH_CLIENT" -o $HOST != gb -a $HOST != penguin ]; then
+if [ -n "$SSH_CLIENT" -a $HOST != carbon ]; then
   SHOW_HOST="$hcolor\h:$(nocolor)"
 fi
 
