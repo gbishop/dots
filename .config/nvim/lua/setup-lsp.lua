@@ -14,7 +14,7 @@ require("mason").setup()
 require("mason-lspconfig").setup({
   ensure_installed = {
     "cssls",
-    "emmet_ls",
+    "emmet_language_server",
     "html",
     "intelephense",
     "jsonls",
