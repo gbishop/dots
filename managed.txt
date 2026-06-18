@@ -3,7 +3,7 @@
 .config/kitty/
 .config/nvim/
 .config/nvim-nightly/
-.config/autostart/
+.config/autostart/zoom.desktop/block.txt
 .config/solaar/
 .fonts/
 .gitconfig
