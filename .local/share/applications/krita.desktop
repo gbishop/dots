@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Krita
+Comment=Digital Painting Application
+Exec=/home/gb/.local/bin/krita.AppImage %F
+Icon=/home/gb/.local/share/icons/krita.png
+Type=Application
+Categories=Graphics;2DGraphics;RasterGraphics;
+MimeType=application/x-krita;image/krita;image/openraster;
+StartupNotify=true
+Terminal=false   

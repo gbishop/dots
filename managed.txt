@@ -9,6 +9,8 @@
 .gitconfig
 .gitignore
 .inputrc
+.local/share/icons/krita.png
+.local/share/applications/krita.desktop
 .profile
 .ssh/config
 .terminfo/
