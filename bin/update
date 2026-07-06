@@ -2,6 +2,12 @@
 
 sudo apt update
 sudo apt upgrade
-if [ -f /var/run/reboot-required ]; then
-  echo 'reboot required'
+
+# Check for a kernel upgrade using needrestart's exit status via grep
+if [ -x /usr/sbin/needrestart ]; then
+  if /usr/sbin/needrestart -k -b | grep -q "NEEDRESTART-KSTA: 3"; then
+    echo '===================================='
+    echo '   REBOOT REQUIRED (Kernel Update)  '
+    echo '===================================='
+  fi
 fi
