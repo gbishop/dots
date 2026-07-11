@@ -1,18 +1,14 @@
 -- theme setup
 
 MiniDeps.add({
-  source = "https://github.com/bartekjaszczak/finale-nvim",
-  checkout = "0.1",
+  source = "https://github.com/alsi-lawr/neotheme.nvim",
 })
-MiniDeps.add("nvim-lua/plenary.nvim")
-
-MiniDeps.add({
-  source = "projekt0n/github-nvim-theme",
+require("neotheme").setup({
+  theme = "gruber-darker",
 })
 
-vim.o.background = "dark"
+vim.cmd.colorscheme("neotheme")
 
-vim.cmd("colorscheme github_dark_high_contrast")
 vim.cmd("set cursorline")
 
 --
@@ -22,6 +18,8 @@ This code has three goals.
   2. Dull the background on inactive windows and splits.
   3. Automatically generate the dim color.
 --]]
+
+MiniDeps.add("nvim-lua/plenary.nvim")
 
 -- move the color c toward grey by factor p (0 to 1)
 local function dull(c, p)
