@@ -1,13 +1,17 @@
 -- theme setup
 
-MiniDeps.add({
-  source = "https://github.com/alsi-lawr/neotheme.nvim",
-})
-require("neotheme").setup({
-  theme = "gruber-darker",
-})
+MiniDeps.add("Aejkatappaja/sora")
+require("sora").setup()
+vim.cmd("colorscheme sora")
 
-vim.cmd.colorscheme("neotheme")
+-- MiniDeps.add({
+--   source = "https://github.com/alsi-lawr/neotheme.nvim",
+-- })
+-- require("neotheme").setup({
+--   theme = "gruber-darker",
+-- })
+--
+-- vim.cmd.colorscheme("neotheme")
 
 vim.cmd("set cursorline")
 
