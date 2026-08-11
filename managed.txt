@@ -5,6 +5,7 @@
 .config/nvim-nightly/
 .config/autostart/zoom.desktop/block.txt
 .config/solaar/
+.config/zed/
 .fonts/
 .gitconfig
 .gitignore
