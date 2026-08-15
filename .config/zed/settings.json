@@ -7,6 +7,10 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "edit_predictions": {
+    "mode": "subtle"
+  },
+  "show_completions_on_input": false,
   "show_signature_help_after_edits": false,
   "always_treat_brackets_as_autoclosed": true,
   "toolbar": {

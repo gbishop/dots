@@ -30,13 +30,7 @@
   {
     "context": "vim_mode == insert",
     "bindings": {
-      "ctrl-space": "editor::ShowSignatureHelp"
-    }
+      "ctrl-space": "editor::ShowSignatureHelp",
+    },
   },
-  {
-    "context": "vim_mode == insert",
-    "unbind": {
-      "ctrl-s": "editor::ShowSignatureHelp"
-    }
-  }
 ]
