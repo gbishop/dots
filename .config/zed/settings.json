@@ -7,10 +7,29 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "diagnostics_max_severity": "warning",
+  "show_signature_help_after_edits": false,
+  "always_treat_brackets_as_autoclosed": true,
+  "toolbar": {
+    "code_actions": true,
+    "agent_review": false
+  },
+  "auto_signature_help": false,
+  "scroll_beyond_last_line": "off",
+  "which_key": {
+    "enabled": true
+  },
+  "tabs": {
+    "show_diagnostics": "all",
+  },
+  "git": {
+    "inline_blame": {
+      "enabled": false,
+    },
+  },
+  "diagnostics_max_severity": "all",
   "format_on_save": "on",
   "session": {
-    "trust_all_worktrees": true
+    "trust_all_worktrees": true,
   },
   "vim_mode": true,
   "ui_font_size": 16,

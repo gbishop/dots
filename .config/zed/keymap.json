@@ -13,11 +13,30 @@
     },
   },
   {
-    "context": "Editor && vim_mode == normal",
+    "context": "Editor && vim_mode == normal && !menu",
     "bindings": {
       "g h": "pane::ActivatePreviousItem",
       "g l": "pane::ActivateNextItem",
+      "ctrl-s": "workspace::SaveAll",
       // "j k": "vim::NormalBefore"
     },
   },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      "ctrl-s": ["workspace::SendKeystrokes", "escape : w a enter"],
+    },
+  },
+  {
+    "context": "vim_mode == insert",
+    "bindings": {
+      "ctrl-space": "editor::ShowSignatureHelp"
+    }
+  },
+  {
+    "context": "vim_mode == insert",
+    "unbind": {
+      "ctrl-s": "editor::ShowSignatureHelp"
+    }
+  }
 ]
