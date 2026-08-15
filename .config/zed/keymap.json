@@ -1,36 +1,46 @@
-// Zed keymap
-//
-// For information on binding keys, see the Zed
-// documentation: https://zed.dev/docs/key-bindings
-//
-// To see the default key bindings run `zed: open default keymap`
-// from the command palette.
 [
   {
     "context": "Workspace",
-    "bindings": {
-      // "shift shift": "file_finder::Toggle"
-    },
+    "bindings": {}
   },
   {
     "context": "Editor && vim_mode == normal && !menu",
     "bindings": {
       "g h": "pane::ActivatePreviousItem",
       "g l": "pane::ActivateNextItem",
-      "ctrl-s": "workspace::SaveAll",
-      // "j k": "vim::NormalBefore"
-    },
+      "ctrl-s": "workspace::SaveAll"
+    }
   },
   {
     "context": "Editor && vim_mode == insert",
     "bindings": {
-      "ctrl-s": ["workspace::SendKeystrokes", "escape : w a enter"],
-    },
+      "ctrl-s": [
+        "workspace::SendKeystrokes",
+        "escape : w a enter"
+      ]
+    }
   },
   {
     "context": "vim_mode == insert",
     "bindings": {
-      "ctrl-space": "editor::ShowSignatureHelp",
-    },
+      "ctrl-space": "editor::ShowSignatureHelp"
+    }
   },
+  {
+    "context": "vim_mode == insert",
+    "unbind": {
+      "ctrl-s": "editor::ShowSignatureHelp"
+    }
+  },
+  {
+    "context": "vim_mode == normal && extension == bake",
+    "bindings": {
+      "space r": [
+        "task::Spawn",
+        {
+          "task_name": "Update recipe"
+        }
+      ]
+    }
+  }
 ]
