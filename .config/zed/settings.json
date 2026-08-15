@@ -7,16 +7,20 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "terminal": {
+    "font_size": 15.0
+  },
+  "buffer_line_height": "standard",
   "show_signature_help_after_edits": false,
   "always_treat_brackets_as_autoclosed": true,
   "toolbar": {
     "code_actions": true,
-    "agent_review": false
+    "agent_review": false,
   },
   "auto_signature_help": false,
   "scroll_beyond_last_line": "off",
   "which_key": {
-    "enabled": true
+    "enabled": true,
   },
   "tabs": {
     "show_diagnostics": "all",
@@ -33,10 +37,15 @@
   },
   "vim_mode": true,
   "ui_font_size": 16,
-  "buffer_font_size": 15,
+  "buffer_font_size": 16.0,
   "theme": {
     "mode": "dark",
     "light": "One Light",
     "dark": "Ayu Dark",
+  },
+  "languages": {
+    "Python": {
+      "language_servers": ["pyright", "ruff"],
+    },
   },
 }
