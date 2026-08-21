@@ -73,6 +73,7 @@ require("setup-tmux")
 require("setup-treesitter")
 require("setup-whichkey")
 require("setup-live-preview")
+require("setup-overseer")
 
 MiniDeps.add("windwp/nvim-autopairs")
 require("nvim-autopairs").setup()
