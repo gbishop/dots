@@ -23,6 +23,8 @@ bin/mnpassword
 bin/nightlyNeoVim
 bin/Nvim
 bin/nvr-scratch
+bin/pull-dir
+bin/push-dir
 bin/stableNeoVim
 bin/tmux-paste-to-python
 bin/update

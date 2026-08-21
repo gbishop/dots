@@ -1,0 +1,35 @@
+#!/usr/bin/bash
+
+# A hack for folder synchronization between my desktop and
+# laptop because I am too forgetful to get it right.
+
+# The flow for push is 
+# 1. check that local files are writable,
+# 2. rsync local files to the other machine,
+# 3. make all local files not writable.
+#
+# The flow for pull is 
+# 1. check that local files are not writable,
+# 2. rsync files from the other machine,
+# 3. mark remote files not writable.
+#
+
+set -e
+
+if [[ "$HOSTNAME" == "carbon" ]]; then
+  OTHER="gbhome"
+else
+  OTHER="carbon"
+fi
+
+pwd=$(pwd)
+
+# assure that local files are not writable
+[ -w "$pwd" ] && { echo "$pwd not locked"; exit 1; }
+
+# rsync files from remote
+rsync -a --delete $OTHER:$pwd/ .
+
+# mark files on other machine unwritable
+ssh $OTHER chmod -R u-w $pwd
+
