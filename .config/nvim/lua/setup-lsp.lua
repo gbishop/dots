@@ -10,6 +10,36 @@ add({
     "WhoIsSethDaniel/mason-tool-installer.nvim",
   },
 })
+
+vim.lsp.config("pyright", {
+  settings = {
+    pyright = {
+      disableTaggedHints = false,
+    },
+    python = {
+      analysis = {
+        typeCheckingMode = "standard",
+        reportUnusedImport = "warning",
+      },
+    },
+  },
+})
+
+vim.lsp.config.lua_ls = {
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server you are using LuaJIT (Neovim's runtime)
+        version = "LuaJIT",
+      },
+      diagnostics = {
+        globals = { "vim" },
+        disable = { "redefined-local" },
+      },
+    },
+  },
+}
+
 require("mason").setup()
 require("mason-lspconfig").setup({
   ensure_installed = {
@@ -30,21 +60,6 @@ require("mason-tool-installer").setup({
     "stylua",
   },
 })
-
-vim.lsp.config.lua_ls = {
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server you are using LuaJIT (Neovim's runtime)
-        version = "LuaJIT",
-      },
-      diagnostics = {
-        globals = { "vim" },
-        disable = { "redefined-local" },
-      },
-    },
-  },
-}
 
 local tb = require("telescope.builtin")
 require("refjump").setup()
