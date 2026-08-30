@@ -82,6 +82,11 @@ PROMPT_COMMAND="history -a;"
 export EDITOR="vim"
 PS1='$ '
 
+locked() {
+  [ ! -w . ] && echo " LOCKED"
+}
+PS1="\`locked\`$PS1"
+
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
