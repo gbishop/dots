@@ -62,7 +62,7 @@ ts.setup({
         ["<C-d>"] = false,
       },
     },
-    file_ignore_patterns = { "dist" },
+    file_ignore_patterns = { "dist", "^.git/" },
   },
   extensions = {
     file_browser = {
