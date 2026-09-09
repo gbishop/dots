@@ -106,7 +106,7 @@ if [ -f /usr/bin/git ]; then
         [ -t 1 ] && echo "Did not find git prompt"
     fi
     case "$TERM" in
-    xterm*|screen*|tmux*)
+    xterm*|screen*|tmux*|foot)
       export PS1="$SHOW_HOST$dcolor\W$(nocolor)$gcolor"'`__git_ps1 " %s"`'"$(nocolor)$PS1"
         ;;
     *)
