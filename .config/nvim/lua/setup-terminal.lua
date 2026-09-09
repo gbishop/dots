@@ -16,3 +16,12 @@ end
 -- 3. Telescope Buffer Picker
 -- Keeps <Space><Space> for Normal mode, uses <Alt-Space> or <Alt-b> in Terminal
 map("t", "<A-Space>", "<cmd>Telescope buffers<CR>")
+
+vim.api.nvim_create_autocmd("termopen", {
+  group = vim.api.nvim_create_augroup("custom-term-open", { clear = true }),
+  callback = function()
+    vim.opt_local.number = false
+    vim.opt_local.relativenumber = false
+    vim.cmd.startinsert()
+  end,
+})

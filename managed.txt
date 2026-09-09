@@ -1,6 +1,6 @@
 .bash_logout
 .bashrc
-.config/foot/
+.config/foot/foot.ini
 .config/kitty/
 .config/nvim/
 .config/nvim-nightly/
