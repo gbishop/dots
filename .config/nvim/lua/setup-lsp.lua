@@ -17,6 +17,7 @@ vim.lsp.config("pyright", {
       disableTaggedHints = false,
     },
     python = {
+      pythonPath = "/home/gb/python/bin/python",
       analysis = {
         typeCheckingMode = "standard",
         reportUnusedImport = "warning",
