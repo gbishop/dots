@@ -45,8 +45,7 @@ vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.expandtab = true
 vim.opt.hlsearch = false -- disable search highlight
--- Maybe make this depend on ssh?
--- vim.g.clipboard = "xclip"
+vim.opt.clipboard = "unnamedplus"
 vim.opt.mousescroll = "ver:10"
 
 require("keymaps")
@@ -69,9 +68,8 @@ require("setup-lualine")
 require("setup-mini")
 require("setup-neotree")
 require("setup-telescope")
-require("setup-tmux")
+require("setup-wezterm")
 require("setup-treesitter")
-require("setup-terminal")
 require("setup-whichkey")
 
 MiniDeps.add("windwp/nvim-autopairs")

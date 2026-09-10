@@ -1,99 +1,23 @@
 -- theme setup
 
-MiniDeps.add("Aejkatappaja/sora")
-require("sora").setup()
-vim.cmd("colorscheme sora")
+MiniDeps.add("EdenEast/nightfox.nvim")
 
--- MiniDeps.add({
---   source = "https://github.com/alsi-lawr/neotheme.nvim",
--- })
--- require("neotheme").setup({
---   theme = "gruber-darker",
--- })
---
--- vim.cmd.colorscheme("neotheme")
+-- Map Neovim scheme to WezTerm scheme name
+local theme_map = {
+  ["carbonfox"] = "Carbonfox",
+}
 
-vim.cmd("set cursorline")
+vim.api.nvim_create_autocmd("ColorScheme", {
+  desc = "Sync active theme to WezTerm",
+  callback = function(args)
+    local wez_theme = theme_map[args.match] or args.match
+    local path = vim.fn.expand("~/.config/wezterm/theme.txt")
+    local f = io.open(path, "w")
+    if f then
+      f:write(wez_theme)
+      f:close()
+    end
+  end,
+})
 
---
---[[
-This code has three goals.
-  1. Keep the NVIM and TMUX colors synchronized.
-  2. Dull the background on inactive windows and splits.
-  3. Automatically generate the dim color.
---]]
-
-MiniDeps.add("nvim-lua/plenary.nvim")
-
--- move the color c toward grey by factor p (0 to 1)
-local function dull(c, p)
-  local result = 0
-  local scale = 1
-  while c > 0 do
-    local byte = c % 256
-    c = math.floor(c / 256)
-    byte = math.floor((1 - p) * byte + p * 128)
-    result = result + byte * scale
-    scale = scale * 256
-  end
-  return result
-end
-
--- adjust colors when the theme changes
-local function adjustColors()
-  local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
-  local activeBG = normal.bg or 0
-  local inactiveBG = dull(activeBG, 0.15)
-  local activeFG = normal.fg
-
-  vim.cmd(string.format("hi ActiveWindow guibg=#%x", activeBG))
-  vim.cmd(string.format("hi InactiveWindow guibg=#%x", inactiveBG))
-  vim.cmd([[set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow]])
-
-  -- adjust TMUX colors
-  local Job = require("plenary.job")
-  ---@diagnostic disable-next-line: missing-fields
-  Job:new({
-    command = "tmux",
-    args = {
-      "set",
-      "-g",
-      "window-active-style",
-      string.format("fg=#%06x bg=#%06x", activeFG, activeBG),
-      ";",
-      "set",
-      "-g",
-      "window-style",
-      string.format("fg=#%06x bg=#%06x", activeFG, inactiveBG),
-      ";",
-      "set",
-      "-g",
-      "pane-border-style",
-      string.format("fg=#%06x bg=#%06x", activeFG, inactiveBG),
-      ";",
-      "set",
-      "-g",
-      "pane-active-border-style",
-      string.format("fg=#%06x bg=#%06x", activeFG, inactiveBG),
-    },
-  }):sync()
-
-  -- dull when NVIM loses focus
-  local agroup = vim.api.nvim_create_augroup("agroup", { clear = true })
-  vim.api.nvim_create_autocmd("FocusLost", {
-    command = string.format("hi ActiveWindow guibg=#%x", inactiveBG),
-    group = agroup,
-  })
-  vim.api.nvim_create_autocmd("FocusGained", {
-    command = string.format("hi ActiveWindow guibg=#%x", activeBG),
-    group = agroup,
-  })
-  -- trigger all this when the colorscheme is changed
-  vim.api.nvim_create_autocmd("ColorScheme", {
-    callback = adjustColors,
-    group = agroup,
-  })
-end
-
--- trigger once to get things started
-adjustColors()
+vim.cmd("colorscheme carbonfox")
