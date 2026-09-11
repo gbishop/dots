@@ -2,7 +2,7 @@ MiniDeps.add("mrjones2014/smart-splits.nvim")
 
 local ss = require("smart-splits")
 ss.setup({
-  multiplexer_integration = "wezterm",
+  multiplexer_integration = "kitty",
 })
 
 -- Keymaps to move seamlessly between Neovim splits and WezTerm panes

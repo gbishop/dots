@@ -72,14 +72,14 @@ config.keys = {
 	resize_keys("k", "Up"),
 	resize_keys("l", "Right"),
 
-	-- Pane Splitting (<Leader> + | or -)
+	-- Pane Splitting (<Leader> + s or v)
 	{
-		key = "|",
-		mods = "LEADER|SHIFT",
+		key = "s",
+		mods = "LEADER",
 		action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 	},
 	{
-		key = "-",
+		key = "v",
 		mods = "LEADER",
 		action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
 	},
@@ -87,6 +87,8 @@ config.keys = {
 	-- Pane Utility Controls
 	{ key = "x", mods = "LEADER", action = act.CloseCurrentPane({ confirm = false }) },
 	{ key = "z", mods = "LEADER", action = act.TogglePaneZoomState },
+
+	{ key = "F11", mods = "NONE", action = act.ToggleFullScreen },
 }
 
 return config

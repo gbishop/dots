@@ -68,7 +68,7 @@ require("setup-lualine")
 require("setup-mini")
 require("setup-neotree")
 require("setup-telescope")
-require("setup-wezterm")
+require("setup-kitty")
 require("setup-treesitter")
 require("setup-whichkey")
 
