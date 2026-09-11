@@ -1,6 +1,4 @@
 #!/bin/bash
-# ~/.bashrc: executed by bash(1) for non-login shells.
-
 /home/gb/bin/log .bashrc starts
 /home/gb/bin/log TERM is $TERM
 export HOST=`hostname -s`
@@ -25,20 +23,6 @@ export MANPATH=$(dedup $MANPATH:/home/gb/share/man)
 # If not running interactively, quit
 [ -z "$PS1" ] && return
 
-# Remember TERM
-export REALTERM=${REALTERM:-$TERM}
-
-fgcolor() {
-  printf "\[\e[1;$1m\]"
-}
-nocolor() {
-  printf "\[\e[m\]"
-}
-
-hcolor=$(fgcolor 31) # red
-dcolor=$(fgcolor 34) # blue
-gcolor=$(fgcolor 32) # green
-
 /home/gb/bin/log .bashrc continues
 
 # enable vi mode
@@ -61,40 +45,55 @@ shopt -s cmdhist
 PROMPT_COMMAND="history -a;"
 
 export EDITOR="vim"
-PS1='$ '
 
-locked() {
-  [ ! -w . ] && echo " LOCKED"
+fgcolor() {
+  printf "\[\e[1;$1m\]"
 }
-PS1="\`locked\`$PS1"
+nocolor() {
+  printf "\[\e[m\]"
+}
 
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
-
-SHOW_HOST=''
-if [ -n "$SSH_CLIENT" -a $HOST != carbon ]; then
-  SHOW_HOST="$hcolor\h:$(nocolor)"
+# Load Debian's native Git prompt helper
+if [ -f /usr/lib/git-core/git-prompt.sh ]; then
+    . /usr/lib/git-core/git-prompt.sh
+elif [ -f /usr/lib/git-core/git-sh-prompt ]; then
+    . /usr/lib/git-core/git-sh-prompt
 fi
 
-if [ -f /usr/bin/git ]; then
-    export GIT_PS1_SHOWDIRTYSTATE=true
-    export GIT_PS1_SHOWUNTRACKEDFILES=true
-    if [ -f /usr/lib/git-core/git-sh-prompt ]; then
-        . /usr/lib/git-core/git-sh-prompt;
-    elif [ -f /etc/bash_completion.d/git ]; then
-        . /etc/bash_completion.d/git
-    else
-        [ -t 1 ] && echo "Did not find git prompt"
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+
+build_ps1() {
+    # Properly escaped ANSI color codes
+    local RED='\[\e[1;31m\]'
+    local BLUE='\[\e[1;34m\]'
+    local GREEN='\[\e[1;32m\]'
+    local RESET='\[\e[0m\]'
+
+    # 1. Hostname check (only show if SSH'd in OR not on carbon)
+    local host_str=""
+    if [[ -n "$SSH_CLIENT" ]]; then
+        host_str="${RED}\h:${RESET}"
     fi
-    case "$TERM" in
-    xterm*|screen*)
-      export PS1="$SHOW_HOST$dcolor\W$(nocolor)$gcolor"'`__git_ps1 " %s"`'"$(nocolor)$PS1"
-        ;;
-    *)
-        export PS1="$SHOW_HOST"'\W`__git_ps1`$PS1'
-        ;;
-    esac
-fi
+
+    # 2. Read-only folder check
+    local lock_str=""
+    if [[ ! -w . ]]; then
+        lock_str="${RED} LOCKED${RESET}"
+    fi
+
+    # 3. Git status
+    local git_str=""
+    if declare -f __git_ps1 &>/dev/null; then
+        git_str="$(__git_ps1 ' %s')"
+    fi
+
+    # Assemble: [host:] directory [git status] [LOCKED] $
+    PS1="${host_str}${BLUE}\W${RESET}${GREEN}${git_str}${RESET}${lock_str}\$ "
+}
+
+PROMPT_COMMAND=build_ps1
+
 
 # Alias definitions.
 alias ls='ls -F --hide=__pycache__ '
