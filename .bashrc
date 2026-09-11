@@ -39,25 +39,6 @@ hcolor=$(fgcolor 31) # red
 dcolor=$(fgcolor 34) # blue
 gcolor=$(fgcolor 32) # green
 
-# start tmux if conditions are right
-/home/gb/bin/log term is "$TERM"
-export HOST=`hostname -s`
-/home/gb/bin/log host is "$HOST"
-
-session="$(sed s/penguin/CB/ <<< $HOST)"
-
-case $TERM in
-    rxvt-unicode-256color | xterm-kitty)
-      /home/gb/bin/log TMUX is $TMUX
-      if [ $HOST == penguin ]; then
-        killall xcape
-        /home/gb/bin/log running xcape
-        xcape -e Control_L=Escape
-      fi
-	[ -z "$TMUX" -a ! -f "notmux" ] && exec tmux -2 new-session -A -s $session
-	;;
-esac
-
 /home/gb/bin/log .bashrc continues
 
 # enable vi mode
@@ -106,7 +87,7 @@ if [ -f /usr/bin/git ]; then
         [ -t 1 ] && echo "Did not find git prompt"
     fi
     case "$TERM" in
-    xterm*|screen*|tmux*|foot|wezterm)
+    xterm*|screen*)
       export PS1="$SHOW_HOST$dcolor\W$(nocolor)$gcolor"'`__git_ps1 " %s"`'"$(nocolor)$PS1"
         ;;
     *)
